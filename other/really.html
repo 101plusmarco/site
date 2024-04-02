@@ -10,28 +10,53 @@
             text-align: center;
             background-color: black; /* Set background color to black */
             color: white; /* Set text color to white */
+            margin: 0; /* Remove default margin */
+            height: 100vh; /* Set height of body to viewport height */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
         #audio-container {
             position: absolute;
             left: -9999px;
         }
         #centered-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            display: none; /* Hide the text initially */
             font-size: 72px; /* Increased font size */
+        }
+        #show-button {
+            font-size: 24px; /* Adjust button font size */
+            padding: 12px 24px; /* Add padding to the button */
         }
     </style>
 </head>
 <body>
     <div id="audio-container">
-        <audio autoplay loop>
+        <audio id="background-audio" preload="auto">
             <source src="../media/conga.mp3" type="audio/mpeg">
         </audio>
     </div>
+    <!-- Define a button to play audio and show the text -->
+    <button id="show-button" onclick="playAudioAndShowText()">Consent to Play Audio</button>
+    
+    <!-- Define the text to be shown -->
     <div id="centered-text">
         Really?
     </div>
+    
+    <script>
+        function playAudioAndShowText() {
+            // Get the audio element
+            var audio = document.getElementById("background-audio");
+            // Play the audio
+            audio.play();
+            
+            // Show the text by setting its display property to "block"
+            document.getElementById("centered-text").style.display = "block";
+            
+            // Hide the button by setting its display property to "none"
+            document.getElementById("show-button").style.display = "none";
+        }
+    </script>
 </body>
 </html>
