@@ -49,6 +49,10 @@
       position: fixed;
       bottom: 0;
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box; /* Ensure footer does not overflow */
     }
     ul {
       list-style: none;
@@ -63,6 +67,24 @@
     }
     a:hover {
       text-decoration: underline;
+    }
+    footer button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    footer button:hover {
+      background-color: #0056b3;
+    }
+
+    .footer-content {
+      flex-grow: 1;
     }
   </style>
 </head>
@@ -102,9 +124,13 @@
 
   </div>
 
-  <footer>
-    No copyright. Just a portfolio.
-  </footer>
+<footer style="display: flex; align-items: center; justify-content: space-between; padding: 20px;">
+    <div>
+        <a href="main2.html" style="text-decoration: none;"><button><strong>Download thigh pics</strong></button></a>
+    </div>
+    <div class="footer-content" style="text-align: center; margin-right: auto; margin-left: -160px;">No copyright. Just a portfolio.</div>
+    <div></div>
+</footer>
 
 </body>
 </html>
