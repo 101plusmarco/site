@@ -12,11 +12,42 @@
       background-color: #ffff;
     }
     header {
-      background-color: #000000;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
+    background-color: #000000;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-content {
+    margin-bottom: 20px;
+}
+
+.header-buttons {
+    display: flex;
+}
+
+.header-buttons a {
+    margin: 0 10px;
+}
+
+.header-buttons button {
+    background-color: #292929;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.header-buttons button:hover {
+    background-color: #1f1f1f;
+}
+
     h1 {
       margin: 0;
       font-size: 48px;
@@ -28,8 +59,8 @@
       background-color: #fff;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      position: relative; /* Add position relative */
-      overflow: hidden; /* Prevent overflow */
+      position: relative;
+      overflow: hidden;
     }
     .section {
       margin-bottom: 30px;
@@ -54,7 +85,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-sizing: border-box; /* Ensure footer does not overflow */
+      box-sizing: border-box;
     }
     ul {
       list-style: none;
@@ -71,7 +102,7 @@
       text-decoration: underline;
     }
     footer button {
-      background-color: #007bff;
+      background-color: #c40000;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -90,35 +121,40 @@
     }
     
     #cat {
-      position: fixed; /* Position the cat image fixed */
-      left: -200px; /* Position the cat image off the left edge initially */
-      top: calc(50% - 100px); /* Center the cat image vertically */
-      z-index: -1; /* Set z-index behind other content */
+      position: fixed;
+      left: -200px;
+      top: calc(50% - 100px);
+      z-index: -1;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Marco</h1>
-    <p>Welcome to my very simple portfolio that I put 5 minutes into making.</p>
-  </header>
+    <div class="header-content">
+        <h1>Marco</h1>
+        <p>Welcome to my very simple portfolio that I put 5 minutes into making.</p>
+    </div>
+    <div class="header-buttons">
+        <a href=""><button>About Me</button></a>
+        <a href="examples.html"><button>Examples</button></a>
+    </div>
+</header>
+
+
 
   <div class="container">
-    <!-- Your existing content goes here -->
 
     <div class="section">
       <h2 class="section-header">About Me</h2>
-      <p class="section-content">I'm Marco, a programmer with experience in lua, js and cpp. I love making cool stuff and solving challenging problems. Will add a "past work" section to this when people hire me and actually pay me.</p>
+      <p class="section-content">I'm Marco, a programmer with experience in lua, js and cpp. I love making cool stuff and solving problems. Will add a "past work" section to this when people hire me and actually pay me.</p>
     </div>
 
     <div class="section">
       <h2 class="section-header">Experience</h2>
       <p class="section-content">Here's some details about my experience:</p>
       <ul class="section-content">
-        <li>4 years of training mixed in lua, js and cpp.</li>
-        <li>Worked on Roblox projects from bug fixes to datastores and simple combat mechanics.</li>
-        <li>No saved past work. Looking to work with more people to be able to show past work in the future.</li>
+        From Roblox game development to web applications and full stack development, I have made several contributions to a wide range of projects. I have used my skills to create scripts and programs that meet client expectations, using Lua, JavaScript and C++.
       </ul>
     </div>
 
@@ -127,19 +163,16 @@
       <p class="section-content">Reach out to me for projects:</p>
       <ul class="section-content">
         <li>Email: marco@firedam.eu.org</li>
-        <!-- <li>Roblox: <a href="https://www.roblox.com/users/23399795/profile">colincolin818</a></li> >
-        <!-- Add more contact information as needed -->
       </ul>
     </div>
 
   </div>
 
-  <!-- Animated cat image -->
   <img id="cat" src="cat.png" height="200rem">
 
 <footer style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
     <div>
-        <a href="main2.html"><button>Download thigh pics</button></a>
+        <a href="main2.html"><button>Ignore this button</button></a>
     </div>
     <div style="width: 320px; text-align: center; margin-left: -160px;">No copyright. Just a portfolio.</div>
     <div></div>
@@ -149,23 +182,20 @@
   const dvdLogo = document.getElementById("cat");
   document.body.style.backgroundColor = "white";
 
-  // Prevent dragging
   dvdLogo.addEventListener("dragstart", function(event) {
     event.preventDefault();
   });
 
   function loop() {
-    const hRange = window.innerWidth - dvdLogo.clientWidth; // Adjusted range
-    const vRange = window.innerHeight - dvdLogo.clientHeight; // Adjusted range
+    const hRange = window.innerWidth - dvdLogo.clientWidth;
+    const vRange = window.innerHeight - dvdLogo.clientHeight;
     const time = performance.now() * 0.2;
 
-    // Calculate x position within the bounds of the window
     let x = Math.abs((time % (hRange * 2)) - hRange);
     if (x > hRange) {
       x = hRange - (x - hRange);
     }
 
-    // Calculate y position within the bounds of the window
     let y = Math.abs((time % (vRange * 2)) - vRange);
     if (y > vRange) {
       y = vRange - (y - vRange);
