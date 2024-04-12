@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examples | Marco</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffff;
+    }
+    header {
+    background-color: #000000;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-content {
+    margin-bottom: 20px;
+}
+
+.header-buttons {
+    display: flex;
+}
+
+.header-buttons a {
+    margin: 0 10px;
+}
+
+.header-buttons button {
+    background-color: #292929;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.header-buttons button:hover {
+    background-color: #1f1f1f;
+}
+    h1 {
+      margin: 0;
+      font-size: 48px;
+    }
+    footer {
+      background-color: #000000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box; /* Ensure footer does not overflow */
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .text-container {
+      margin-top: 10px;
+    }
+    img, video {
+      max-width: 100%;
+      max-height: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+        <h1>Marco</h1>
+        <p>Welcome to my very simple portfolio that I put 5 minutes into making.</p>
+    </div>
+    <div class="header-buttons">
+        <a href="index.html"><button>About Me</button></a>
+        <a href=""><button>Examples</button></a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="section">
+      <video src="example2.mp4" controls autoplay loop muted></video>
+      <p>By the way, the kill effect system AND the hammer kill effect is for sale at $15 as the original person never paid me for it. Once bought, it will no longer be for sale.</p>
+    </div>
+
+    <div class="section">
+        <video src="example1.mp4" controls autoplay loop muted></video>
+        <p>An example RNG system.</p>
+    </div>
+
+    <div class="section">
+        <img src="example3.png" alt="Example 3">
+        <p>Code snippet from an inventory system</p>
+    </div>
+
+</div>
+
+<footer>
+    <div></div>
+    <div>No copyright. Just a portfolio.</div>
+    <div></div>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const scrollDuration = 1000;
+
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+      link.addEventListener("click", function(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        const targetElement = document.getElementById(targetId);
+        const startPosition = window.pageYOffset;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const scrollProgress = Math.min(timeElapsed / scrollDuration, 1);
+          window.scrollTo(0, startPosition + distance * scrollProgress);
+
+          if (timeElapsed < scrollDuration) {
+            requestAnimationFrame(animation);
+          }
+        }
+
+        requestAnimationFrame(animation);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
