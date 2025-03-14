@@ -15,6 +15,7 @@
             display: flex; /* Use flexbox for centering */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
+            flex-direction: column; /* Stack content vertically */
         }
         #audio-container {
             position: absolute;
@@ -40,11 +41,18 @@
         #show-button:hover {
             background-color: #C8A4D4;
         }
+        #volume-container {
+            display: none; /* Hide the volume slider initially */
+            margin-top: 20px; /* Add space between the text and volume slider */
+        }
+        #volume-slider {
+            width: 200px;  /* You can adjust the width of the slider */
+        }
     </style>
 </head>
 <body>
     <div id="audio-container">
-        <audio id="background-audio" preload="auto" loop>
+        <audio id="background-audio" preload="auto">
             <source src="../media/livin thing.mp3" type="audio/mpeg">
             <source src="../media/master of puppets.mp3" type="audio/mpeg">
             <source src="../media/lonely boy.mp3" type="audio/mpeg">
@@ -57,23 +65,26 @@
     <div id="centered-text">
         Very funny.
     </div>
-    
+
+    <!-- Volume slider container -->
+    <div id="volume-container">
+        <label for="volume-slider">Volume: </label>
+        <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="1">
+    </div>
+	
     <script>
         function playAudioAndShowText() {
-            // Get the audio element
             var audio = document.getElementById("background-audio");
             
-            // Set the first song as the initial source and play it
             audio.src = audio.getElementsByTagName('source')[0].src;
             audio.play();
 
-            // Show the text by setting its display property to "block"
             document.getElementById("centered-text").style.display = "block";
             
-            // Hide the button by setting its display property to "none"
             document.getElementById("show-button").style.display = "none";
             
-            // Play the next song when the current one ends
+            document.getElementById("volume-container").style.display = "block";
+
             audio.addEventListener('ended', function() {
                 playNextSong(audio);
             });
@@ -83,14 +94,19 @@
             const sources = audio.getElementsByTagName('source');
             let currentSongIndex = Array.from(sources).findIndex(source => source.src === audio.src);
             
-            // Move to the next song
+            // next song
             currentSongIndex = (currentSongIndex + 1) % sources.length;
             
-            // Change the audio source to the next song
             audio.src = sources[currentSongIndex].src;
             audio.play();
         }
+		
+        var volumeSlider = document.getElementById("volume-slider");
+        
+        volumeSlider.addEventListener("input", function() {
+            var audio = document.getElementById("background-audio");
+            audio.volume = volumeSlider.value;  // volume based on the slider's value
+        });
     </script>
-</body>
 </body>
 </html>
