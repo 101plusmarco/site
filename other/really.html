@@ -60,7 +60,7 @@
         </audio>
     </div>
     <!-- Define a button to play audio and show the text -->
-    <button id="show-button" onclick="playAudioAndShowText()">Download</button>
+    <button id="show-button" onclick="playsound()">Download</button>
     
     <!-- Define the text to be shown -->
     <div id="centered-text">
@@ -74,33 +74,34 @@
     </div>
 	
     <script>
-        function playAudioAndShowText() {
-            var audio = document.getElementById("background-audio");
-            
-            audio.src = audio.getElementsByTagName('source')[0].src;
-            audio.play();
+        function playsong() {
+    var audio = document.getElementById("background-audio");
+    const sources = audio.getElementsByTagName('source');
+    const randomIndex = Math.floor(Math.random() * sources.length);
+    audio.src = sources[randomIndex].src;
+    audio.play();
 
-            document.getElementById("centered-text").style.display = "block";
-            
-            document.getElementById("show-button").style.display = "none";
-            
-            document.getElementById("volume-container").style.display = "block";
+    document.getElementById("centered-text").style.display = "block";
+    document.getElementById("show-button").style.display = "none";
+    document.getElementById("volume-container").style.display = "block";
 
-            audio.addEventListener('ended', function() {
-                playNextSong(audio);
-            });
-        }
+    audio.addEventListener('ended', function() {
+        playNextSong(audio);
+    });
+}
 
         function playNextSong(audio) {
-            const sources = audio.getElementsByTagName('source');
-            let currentSongIndex = Array.from(sources).findIndex(source => source.src === audio.src);
-            
-            // next song
-            currentSongIndex = (currentSongIndex + 1) % sources.length;
-            
-            audio.src = sources[currentSongIndex].src;
-            audio.play();
-        }
+    const sources = audio.getElementsByTagName('source');
+    let currentSongIndex = Array.from(sources).findIndex(source => source.src === audio.src);
+
+    let nextIndex;
+    do {
+        nextIndex = Math.floor(Math.random() * sources.length);
+    } while (nextIndex === currentSongIndex && sources.length > 1);
+
+    audio.src = sources[nextIndex].src;
+    audio.play();
+}
 		
         var volumeSlider = document.getElementById("volume-slider");
         
