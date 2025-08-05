@@ -3,169 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marco</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #ffff;
-    }
-    header {
-    background-color: #000000;
-    color: #fff;
-    padding: 40px 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+  <title>fynzel :3</title>
 
-.header-content {
-    margin-bottom: 20px;
-}
-
-.header-buttons {
-    display: flex;
-}
-
-.header-buttons a {
-    margin: 0 10px;
-}
-
-.header-buttons button {
-    background-color: #292929;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-
-.header-buttons button:hover {
-    background-color: #1f1f1f;
-}
-
-    h1 {
-      margin: 0;
-      font-size: 48px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .section {
-      margin-bottom: 30px;
-    }
-    .section-header {
-      font-size: 32px;
-      margin-bottom: 10px;
-      color: #343a40;
-    }
-    .section-content {
-      font-size: 18px;
-      color: #495057;
-    }
-    footer {
-      background-color: #000000;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer button {
-      background-color: #c40000;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-    }
-
-    footer button:hover {
-      background-color: #0056b3;
-    }
-
-    .footer-content {
-      flex-grow: 1;
-    }
-    
-    #cat {
-      position: fixed;
-      left: -200px;
-      top: calc(50% - 100px);
-      z-index: -1;
-    }
-  </style>
 </head>
 <body>
-
+<link rel="stylesheet" href="style.css">
   <header>
     <div class="header-content">
-        <h1>Marco</h1>
-        <p>Welcome to my very simple portfolio that I put 5 minutes into making.</p>
+        <h1>Fynzel</h1>
     </div>
-    <div class="header-buttons">
-        <a href=""><button>About Me</button></a>
-        <a href="examples.html"><button>Examples</button></a>
-    </div>
-</header>
+	</header>
 
-
-
-  <div class="container">
+  <div class="wrapper">
+	<div class="container">
 
     <div class="section">
-      <h2 class="section-header">About Me</h2>
-      <p class="section-content">I'm Marco, a programmer with experience from 4-5 years ranging from but not limited to java to lua. I love making cool stuff and solving problems.</p>
+      <h2 class="section-header">About Me :3</h2>
+      <p class="section-content">I'm Fynzel.<br>I'm a femboy.<br>I'm based in the Netherlands.<br>20 years old.<br><br>I'm learning to make music. A little lazy though, haven't opened the software in months.<br>I used to be a programmer. Java, Kotlin, js, cpp and React.</p>
     </div>
 
     <div class="section">
-      <h2 class="section-header">Experience</h2>
-      <p class="section-content">Here's some details about my experience:</p>
+      <h2 class="section-header">Socials</h2>
       <ul class="section-content">
-        From Roblox game development to web applications and full stack development, I have made several contributions to a wide range of projects. I have used my skills to create scripts and programs that meet client expectations, using Lua, JavaScript and C++.
+        <li>[TEMPORARILY REMOVED]</li>
       </ul>
     </div>
-
-    <div class="section">
-      <h2 class="section-header">Contact Me</h2>
-      <p class="section-content">Reach out to me for projects:</p>
-      <ul class="section-content">
-        <li>Email: marco@firedam.eu.org</li>
-      </ul>
-    </div>
-
+	</div>
   </div>
 
   <img id="cat" src="cat.png" height="200rem">
@@ -179,16 +42,16 @@
 </footer>
 
 <script>
-  const dvdLogo = document.getElementById("cat");
+  const catbounce = document.getElementById("cat");
   document.body.style.backgroundColor = "white";
 
-  dvdLogo.addEventListener("dragstart", function(event) {
+  catbounce.addEventListener("dragstart", function(event) {
     event.preventDefault();
   });
 
   function loop() {
-    const hRange = window.innerWidth - dvdLogo.clientWidth;
-    const vRange = window.innerHeight - dvdLogo.clientHeight;
+    const hRange = window.innerWidth - catbounce.clientWidth;
+    const vRange = window.innerHeight - catbounce.clientHeight;
     const time = performance.now() * 0.2;
 
     let x = Math.abs((time % (hRange * 2)) - hRange);
@@ -201,8 +64,8 @@
       y = vRange - (y - vRange);
     }
 
-    dvdLogo.style.left = `${x}px`;
-    dvdLogo.style.top = `${y}px`;
+    catbounce.style.left = `${x}px`;
+    catbounce.style.top = `${y}px`;
 
     requestAnimationFrame(loop);
   }
