@@ -1,121 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#000;--surface:#080808;--border:#1a1a1a;
+  --accent:#7f77dd;--accent2:#5dcaa5;
+  --text:#e2e2f0;--muted:#666688;--dim:#2a2a3a;
+}
+body{font-family:'JetBrains Mono',monospace;background:#000;color:var(--text);min-height:100vh;overflow-x:hidden;}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+header{display:flex;align-items:flex-start;justify-content:space-between;padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3rem;}
+.tag-label{font-size:11px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
+.name{font-family:'Syne',sans-serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;}
+.name span{color:var(--accent);}
+.role{font-size:13px;color:var(--muted);margin-top:0.8rem;line-height:1.8;}
+.status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent2);margin-top:1.4rem;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;animation:pulse 2s ease infinite;}
+.header-right{text-align:right;font-size:11px;color:var(--muted);line-height:2;flex-shrink:0;}
+.section{margin-bottom:3.5rem;}
+.sec-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.sec-label span{color:var(--accent);margin-right:4px;}
+.about-text{font-size:13px;line-height:1.9;color:var(--text);max-width:600px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color 0.2s,transform 0.2s;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
+.card:hover{border-color:var(--dim);transform:translateX(4px);}.card:hover::before{opacity:1;}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:0.5rem;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);}
+.card-meta{font-size:11px;color:var(--accent);border:1px solid var(--dim);border-radius:3px;padding:2px 8px;}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:0.8rem;}
+.tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag-pill{font-size:10px;color:var(--accent2);border:1px solid rgba(93,202,165,0.2);border-radius:3px;padding:2px 8px;letter-spacing:0.05em;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
+.skill-item{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0.75rem 1rem;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;transition:border-color 0.2s,color 0.2s;}
+.skill-item:hover{border-color:var(--dim);color:var(--text);}
+.skill-icon{color:var(--accent);}
+.contact-item{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0.7rem 1.2rem;font-size:12px;color:var(--muted);}
+.ci-label{color:var(--accent);margin-right:4px;}
+.social-item{display:flex;align-items:center;gap:10px;padding:0.8rem 0;border-bottom:1px solid var(--border);}
+.social-platform{color:var(--muted);width:90px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;}
+.social-link{color:var(--accent);text-decoration:none;font-size:12px;}
+.social-status{color:var(--muted);font-size:11px;margin-left:auto;font-style:italic;}
+.cat-wrap{position:fixed;bottom:20px;right:20px;z-index:10;font-size:28px;animation:floatCat 3s ease-in-out infinite;cursor:default;user-select:none;filter:drop-shadow(0 0 8px rgba(127,119,221,0.4));}
+footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;vertical-align:text-bottom;animation:blink 0.8s step-end infinite;}
+.hidden{display:none;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+@keyframes floatCat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes popIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.pop{animation:popIn 0.25s ease forwards;}
+</style>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fynzel :3</title>
-
+	<title>fynzel :3</title>
 </head>
-<body>
-<link rel="stylesheet" href="style.css">
+
+<div class="wrap">
   <header>
-    <div class="header-content">
-        <h1>simple website</h1>
+    <div>
+      <div class="tag-label hidden" id="e-tag">// portfolio.v2</div>
+      <div class="name hidden" id="e-name">Maximilian<br><span>H.</span></div>
+      <div class="role hidden" id="e-role"></div>
+      <div class="status hidden" id="e-status"><div class="dot"></div><span id="e-status-text"></span></div>
     </div>
-	</header>
-
-  <div class="wrapper">
-	<div class="container">
-
-    <div class="section">
-      <h2 class="section-header">About Me</h2>
-      <p class="section-content" style="white-space: pre-line;">
-		I'm Maximilian H.
-		Accountant at UBS Bank Switzerland | Software Developer
-		Software Developer and Accountant based in Switzerland, with a focus on modular systems, scalable architecture, and clean code, alongside professional experience in bookkeeping, auditing, and tax.
-		---
-		  
-		[PROJECTS]
-		  
-		Modular Round & Ability System
-		A Scalable round-based system with an integrated ability framework, built for clean extensibility and structured client-server communication.
-		
-		Highlights:
-		
-		Modular architecture (independent components)
-		Plug-and-play ability system
-		Client/server handling (RemoteEvents/Functions)
-		Round/state management system
-		Optimized for performance and maintainability
-
-		<a href="https://docs.google.com/document/d/1BSkXCqj3TI1qQ1vhFtKkuRlDHSwWs8Zy9oOpSNupH10/edit?usp=sharing">Documentation</a>
-		---
-		[EXPERIENCE]
-
-		Software Development Background
-		2-3 years at SAP SE as a Software Engineer.
-		
-		Built and maintained modular systems
-		Focused on performance, debugging, and clean structure
-		Experience working in collaborative environments
-		Strong emphasis on readable, scalable code
-		All work was collaborative on GitHub. Past work cannot be shown due to NDA.
-
-		Accountant at UBS Bank Switzerland
-		---
-		[ SKILLS ]
-		  
-		Client-Server Architecture
-		UI Systems
-		Modular Design
-		Debugging & Optimization
-		---
-		[ CONTACT ]
-		
-		Discord: colinizer101
-</p>
+    <div class="header-right hidden" id="e-hright">
+      <div style="color:var(--accent2)">UBS Bank Switzerland</div>
+      <div>Accountant</div>
+      <div style="margin-top:8px;color:var(--accent)">SAP SE</div>
+      <div>Software Engineer (2–3 yr)</div>
     </div>
+  </header>
 
-    <div class="section">
-      <h2 class="section-header">Socials</h2>
-      <ul class="section-content">
-        <li>bluesky - <a href="https://www.youtube.com/watch?v=UVAmlSGH-MM" target="_blank" rel="noopener noreferrer">Temporarily Unavailable</a></li>
-      </ul>
-    </div>
-	</div>
+  <div class="section hidden" id="e-about-sec">
+    <div class="sec-label"><span>//</span>about</div>
+    <p class="about-text" id="e-about"></p>
   </div>
 
-  <img id="cat" src="cat.png" height="200rem">
-
-<footer style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
-    <div>
-       <!-- <a href="main2.html"><button>test</button></a> -->
+  <div class="section hidden" id="e-proj-sec">
+    <div class="sec-label"><span>//</span>projects</div>
+    <div class="card" id="e-card1" style="opacity:0">
+      <div class="card-head">
+        <div class="card-title">Modular Round &amp; Ability System</div>
+        <div class="card-meta">open</div>
+      </div>
+      <div class="card-desc" id="e-proj-desc"></div>
+      <div class="tags hidden" id="e-proj-tags">
+        <span class="tag-pill">Modular Architecture</span>
+        <span class="tag-pill">Client-Server</span>
+        <span class="tag-pill">RemoteEvents</span>
+        <span class="tag-pill">State Management</span>
+        <span class="tag-pill">Performance</span>
+      </div>
+      <div class="hidden" id="e-proj-link" style="margin-top:1rem">
+        <a href="https://docs.google.com/document/d/1BSkXCqj3TI1qQ1vhFtKkuRlDHSwWs8Zy9oOpSNupH10/edit?usp=sharing" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View documentation →</a>
+      </div>
     </div>
-    <!-- <div style="width: 320px; text-align: center; margin-left: -160px;">Your local femboy</div> -->
-    <div></div>
-</footer>
+  </div>
+
+  <div class="section hidden" id="e-exp-sec">
+    <div class="sec-label"><span>//</span>experience</div>
+    <div class="card hidden" id="e-card2">
+      <div class="card-head"><div class="card-title">SAP SE</div><div class="card-meta">2–3 yrs</div></div>
+      <div class="card-desc" id="e-sap-desc"></div>
+      <div class="tags hidden" id="e-sap-tags"><span class="tag-pill">Modular Systems</span><span class="tag-pill">GitHub</span><span class="tag-pill">Debugging</span></div>
+      <div style="margin-top:0.75rem;font-size:11px;color:var(--dim);font-style:italic" class="hidden" id="e-nda">Past work under NDA — collaborative GitHub history</div>
+    </div>
+    <div class="card hidden" id="e-card3">
+      <div class="card-head"><div class="card-title">UBS Bank Switzerland</div><div class="card-meta">current</div></div>
+      <div class="card-desc" id="e-ubs-desc"></div>
+      <div class="tags hidden" id="e-ubs-tags"><span class="tag-pill">Bookkeeping</span><span class="tag-pill">Auditing</span><span class="tag-pill">Tax</span></div>
+    </div>
+  </div>
+
+  <div class="section hidden" id="e-skills-sec">
+    <div class="sec-label"><span>//</span>skills</div>
+    <div class="skills-grid" id="e-skills-grid"></div>
+  </div>
+
+  <div class="section hidden" id="e-social-sec">
+    <div class="sec-label"><span>//</span>socials</div>
+    <div class="card" style="padding:0.5rem 1.5rem">
+      <div class="social-item">
+        <div class="social-platform">Bluesky</div>
+        <a href="https://www.youtube.com/watch?v=UVAmlSGH-MM" target="_blank" class="social-link">Temporarily Unavailable</a>
+        <div class="social-status">coming soon</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section hidden" id="e-contact-sec">
+    <div class="sec-label"><span>//</span>contact</div>
+    <div class="contact-item"><span class="ci-label">discord</span>colinizer101</div>
+  </div>
+
+  <footer class="hidden" id="e-footer">
+    <div>maximilian h. — switzerland</div>
+    <div style="color:var(--accent)">software dev &amp; accountant</div>
+  </footer>
+</div>
+
+<div class="cat-wrap hidden" id="e-cat">🐱</div>
 
 <script>
-  const catbounce = document.getElementById("cat");
-  document.body.style.backgroundColor = "white";
+const SPEED = 0.1;
+const VARIANCE = 1;
 
-  catbounce.addEventListener("dragstart", function(event) {
-    event.preventDefault();
-  });
+function show(id){ const el=document.getElementById(id); el.classList.remove('hidden'); return el; }
+function pop(id){ const el=show(id); el.style.opacity='0'; el.style.animation='none'; requestAnimationFrame(()=>{ el.style.animation='popIn 0.25s ease forwards'; }); return el; }
 
-  function loop() {
-    const hRange = window.innerWidth - catbounce.clientWidth;
-    const vRange = window.innerHeight - catbounce.clientHeight;
-    const time = performance.now() * 0.2;
-
-    let x = Math.abs((time % (hRange * 2)) - hRange);
-    if (x > hRange) {
-      x = hRange - (x - hRange);
+function type(el, text, speed, done){
+  let i=0;
+  const cur=document.createElement('span');
+  cur.className='cursor';
+  el.appendChild(cur);
+  function tick(){
+    if(i<text.length){
+      el.insertBefore(document.createTextNode(text[i++]),cur);
+      setTimeout(tick, speed + Math.random()*speed*VARIANCE);
+    } else {
+      cur.remove();
+      if(done) setTimeout(done,80);
     }
-
-    let y = Math.abs((time % (vRange * 2)) - vRange);
-    if (y > vRange) {
-      y = vRange - (y - vRange);
-    }
-
-    catbounce.style.left = `${x}px`;
-    catbounce.style.top = `${y}px`;
-
-    requestAnimationFrame(loop);
   }
-  loop();
+  tick();
+}
+
+function wait(ms, fn){ setTimeout(fn, ms); }
+
+function runSequence(){
+  // tag
+  wait(200, ()=>{
+    pop('e-tag');
+    wait(350, ()=>{
+      // name
+      pop('e-name');
+      wait(350, ()=>{
+        // role
+        show('e-role');
+        type(document.getElementById('e-role'), 'Software Developer & Accountant · Switzerland', SPEED, ()=>{
+          // status
+          show('e-status');
+          type(document.getElementById('e-status-text'), 'Available for work', SPEED, ()=>{
+            // header right
+            pop('e-hright');
+            wait(300, ()=>{
+              // about section
+              show('e-about-sec');
+              type(document.getElementById('e-about'), 'Software Developer and Accountant based in Switzerland, with a focus on modular systems, scalable architecture, and clean code - alongside professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
+                // projects
+                show('e-proj-sec');
+                const c1=document.getElementById('e-card1');
+                c1.style.opacity='1';
+                type(document.getElementById('e-proj-desc'), 'A scalable round-based system with an integrated ability framework, built for clean extensibility and structured client-server communication.', SPEED, ()=>{
+                  pop('e-proj-tags');
+                  wait(150, ()=>{
+                    pop('e-proj-link');
+                    wait(200, ()=>{
+                      // experience
+                      show('e-exp-sec');
+                      pop('e-card2');
+                      type(document.getElementById('e-sap-desc'), 'Built and maintained modular systems. Focused on performance, debugging, and clean structure in collaborative environments.', SPEED, ()=>{
+                        pop('e-sap-tags');
+                        pop('e-nda');
+                        wait(200, ()=>{
+                          pop('e-card3');
+                          type(document.getElementById('e-ubs-desc'), 'Accountant with professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
+                            pop('e-ubs-tags');
+                            wait(200, ()=>{
+                              // skills
+                              show('e-skills-sec');
+                              const skills=[
+                                'Client-Server Architecture','UI Systems','Modular Design',
+                                'Debugging & Optimization','Bookkeeping','Auditing & Tax'
+                              ];
+                              const grid=document.getElementById('e-skills-grid');
+                              skills.forEach((s,i)=>{
+                                wait(i*80, ()=>{
+                                  const d=document.createElement('div');
+                                  d.className='skill-item';
+                                  d.style.opacity='0';
+                                  d.innerHTML='<span class="skill-icon">▸</span>'+s;
+                                  grid.appendChild(d);
+                                  requestAnimationFrame(()=>{ d.style.animation='popIn 0.2s ease forwards'; });
+                                });
+                              });
+                              wait(skills.length*80+150, ()=>{
+                                pop('e-social-sec');
+                                wait(300, ()=>{
+                                  pop('e-contact-sec');
+                                  wait(300, ()=>{
+                                    pop('e-footer');
+                                    show('e-cat');
+                                  });
+                                });
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+}
+
+window.addEventListener('load', runSequence);
 </script>
-
-
-</body>
-</html>
