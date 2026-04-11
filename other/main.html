@@ -1,3 +1,4 @@
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,7 +35,7 @@ header{display:flex;align-items:flex-start;justify-content:space-between;padding
 .skill-item{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0.75rem 1rem;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;transition:border-color 0.2s,color 0.2s;}
 .skill-item:hover{border-color:var(--dim);color:var(--text);}
 .skill-icon{color:var(--accent);}
-.contact-item{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0.7rem 1.2rem;font-size:12px;color:var(--muted);}
+.contact-item{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--dim);border-radius:4px;padding:0.7rem 1.2rem;font-size:12px;color:var(--muted);}
 .ci-label{color:var(--accent);margin-right:4px;}
 .social-item{display:flex;align-items:center;gap:10px;padding:0.8rem 0;border-bottom:1px solid var(--border);}
 .social-platform{color:var(--muted);width:90px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;}
@@ -48,12 +49,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
 @keyframes floatCat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes popIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.pop{animation:popIn 0.25s ease forwards;}
 </style>
-
-<head>
-	<title>fynzel :3</title>
-</head>
 
 <div class="wrap">
   <header>
@@ -78,10 +74,12 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
 
   <div class="section hidden" id="e-proj-sec">
     <div class="sec-label"><span>//</span>projects</div>
+
+    <!-- PROJECT CARD 1 -->
     <div class="card" id="e-card1" style="opacity:0">
       <div class="card-head">
         <div class="card-title">Modular Round &amp; Ability System</div>
-        <div class="card-meta">open</div>
+        <div class="card-meta">for sale</div>
       </div>
       <div class="card-desc" id="e-proj-desc"></div>
       <div class="tags hidden" id="e-proj-tags">
@@ -90,11 +88,30 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
         <span class="tag-pill">RemoteEvents</span>
         <span class="tag-pill">State Management</span>
         <span class="tag-pill">Performance</span>
+		<span class="tag-pill">Roblox Lua</span>
       </div>
       <div class="hidden" id="e-proj-link" style="margin-top:1rem">
-        <a href="https://docs.google.com/document/d/1BSkXCqj3TI1qQ1vhFtKkuRlDHSwWs8Zy9oOpSNupH10/edit?usp=sharing" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View documentation →</a>
+        <a href="https://docs.google.com/document/d/1BSkXCqj3TI1qQ1vhFtKkuRlDHSwWs8Zy9oOpSNupH10/edit?usp=sharing" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View documentation</a>
       </div>
     </div>
+
+    <div class="card" id="e-card-p2" style="opacity:0">
+      <div class="card-head">
+        <div class="card-title">Stock Market Simulation</div>
+        <div class="card-meta">showcase</div>
+      </div>
+      <div class="card-desc" id="e-proj2-desc"></div>
+      <div class="tags hidden" id="e-proj2-tags">
+        <span class="tag-pill">Accurate Simulation</span>
+        <span class="tag-pill">JavaScript</span>
+        <span class="tag-pill">React</span>
+		<span class="tag-pill">PostgreSQL</span>
+      </div>
+      <div class="hidden" id="e-proj2-link" style="margin-top:1rem">
+        <a href="https://firedam.eu.org" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View project</a>
+      </div>
+    </div>
+
   </div>
 
   <div class="section hidden" id="e-exp-sec">
@@ -142,7 +159,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
 <div class="cat-wrap hidden" id="e-cat">🐱</div>
 
 <script>
-const SPEED = 0.1;
+const SPEED = 0.05;
 const VARIANCE = 1;
 
 function show(id){ const el=document.getElementById(id); el.classList.remove('hidden'); return el; }
@@ -168,26 +185,20 @@ function type(el, text, speed, done){
 function wait(ms, fn){ setTimeout(fn, ms); }
 
 function runSequence(){
-  // tag
   wait(200, ()=>{
     pop('e-tag');
     wait(350, ()=>{
-      // name
       pop('e-name');
       wait(350, ()=>{
-        // role
         show('e-role');
         type(document.getElementById('e-role'), 'Software Developer & Accountant · Switzerland', SPEED, ()=>{
-          // status
           show('e-status');
           type(document.getElementById('e-status-text'), 'Available for work', SPEED, ()=>{
-            // header right
             pop('e-hright');
             wait(300, ()=>{
-              // about section
               show('e-about-sec');
               type(document.getElementById('e-about'), 'Software Developer and Accountant based in Switzerland, with a focus on modular systems, scalable architecture, and clean code - alongside professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
-                // projects
+
                 show('e-proj-sec');
                 const c1=document.getElementById('e-card1');
                 c1.style.opacity='1';
@@ -196,51 +207,65 @@ function runSequence(){
                   wait(150, ()=>{
                     pop('e-proj-link');
                     wait(200, ()=>{
-                      // experience
-                      show('e-exp-sec');
-                      pop('e-card2');
-                      type(document.getElementById('e-sap-desc'), 'Built and maintained modular systems. Focused on performance, debugging, and clean structure in collaborative environments.', SPEED, ()=>{
-                        pop('e-sap-tags');
-                        pop('e-nda');
-                        wait(200, ()=>{
-                          pop('e-card3');
-                          type(document.getElementById('e-ubs-desc'), 'Accountant with professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
-                            pop('e-ubs-tags');
-                            wait(200, ()=>{
-                              // skills
-                              show('e-skills-sec');
-                              const skills=[
-                                'Client-Server Architecture','UI Systems','Modular Design',
-                                'Debugging & Optimization','Bookkeeping','Auditing & Tax'
-                              ];
-                              const grid=document.getElementById('e-skills-grid');
-                              skills.forEach((s,i)=>{
-                                wait(i*80, ()=>{
-                                  const d=document.createElement('div');
-                                  d.className='skill-item';
-                                  d.style.opacity='0';
-                                  d.innerHTML='<span class="skill-icon">▸</span>'+s;
-                                  grid.appendChild(d);
-                                  requestAnimationFrame(()=>{ d.style.animation='popIn 0.2s ease forwards'; });
-                                });
-                              });
-                              wait(skills.length*80+150, ()=>{
-                                pop('e-social-sec');
-                                wait(300, ()=>{
-                                  pop('e-contact-sec');
-                                  wait(300, ()=>{
-                                    pop('e-footer');
-                                    show('e-cat');
+                      const c2=document.getElementById('e-card-p2');
+                      c2.style.opacity='1';
+                      type(document.getElementById('e-proj2-desc'), 'A realistic stock market simulation driven by real-world volatility and trend data. Features candlestick and line charts, a heatmap, portfolio management, and a full buy/sell system where large trades move the market. Includes dividends, shorting, market events, a watchlist, and a live leaderboard, built with React and PostgreSQL.', SPEED, ()=>{
+                        pop('e-proj2-tags');
+                        wait(150, ()=>{
+                          pop('e-proj2-link');
+                          wait(200, ()=>{
+                            show('e-exp-sec');
+                            pop('e-card2');
+                            type(document.getElementById('e-sap-desc'), 'Built and maintained modular systems. Focused on performance, debugging, and clean structure in collaborative environments.', SPEED, ()=>{
+                              pop('e-sap-tags');
+                              pop('e-nda');
+                              wait(200, ()=>{
+                                pop('e-card3');
+                                type(document.getElementById('e-ubs-desc'), 'Accountant with professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
+                                  pop('e-ubs-tags');
+                                  wait(200, ()=>{
+                                    show('e-skills-sec');
+                                    const skills=[
+                                      'Client-Server Architecture','UI Systems','Modular Design',
+                                      'Debugging & Optimization','Bookkeeping','Auditing & Tax',
+										'Full-Stack Web Development', 'Database Optimization',
+										'React, JavaScript, Java, C++, Lua'
+                                    ];
+                                    const grid=document.getElementById('e-skills-grid');
+                                    skills.forEach((s,i)=>{
+                                      wait(i*80, ()=>{
+                                        const d=document.createElement('div');
+                                        d.className='skill-item';
+                                        d.style.opacity='0';
+                                        d.innerHTML='<span class="skill-icon">▸</span>'+s;
+                                        grid.appendChild(d);
+                                        requestAnimationFrame(()=>{ d.style.animation='popIn 0.2s ease forwards'; });
+                                      });
+                                    });
+                                    wait(skills.length*80+150, ()=>{
+                                      pop('e-social-sec');
+                                      wait(300, ()=>{
+                                        pop('e-contact-sec');
+                                        wait(300, ()=>{
+                                          pop('e-footer');
+                                          show('e-cat');
+                                        });
+                                      });
+                                    });
+
                                   });
                                 });
                               });
                             });
+
                           });
                         });
                       });
+
                     });
                   });
                 });
+
               });
             });
           });
