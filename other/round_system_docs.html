@@ -1,4 +1,3 @@
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -8,14 +7,12 @@
   --text:#e2e2f0;--muted:#666688;--dim:#2a2a3a;
 }
 body{font-family:'JetBrains Mono',monospace;background:#000;color:var(--text);min-height:100vh;overflow-x:hidden;}
-.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem;position:relative;}
 header{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3rem;}
 .tag-label{font-size:11px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
 .name{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,5vw,2.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
 .name span{color:var(--accent);}
 .role{font-size:13px;color:var(--muted);margin-top:0.8rem;line-height:1.8;}
-.status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent2);margin-top:1.2rem;}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
 .section{margin-bottom:3rem;}
 .sec-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
 .sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -58,7 +55,52 @@ header{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3
 .tip-text code{color:var(--accent2);}
 .warn-text code{color:#f78c6c;}
 footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);flex-wrap:wrap;gap:8px;}
+
+/* ── Sidebar ── */
+.sidebar{
+  position:fixed;
+  left:calc(50% - 570px);
+  top:5rem;
+  width:150px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.sidebar a{
+  font-size:11px;
+  color:var(--muted);
+  text-decoration:none;
+  display:block;
+  padding:4px 10px;
+  border-left:1px solid var(--border);
+  transition:color 0.2s,border-color 0.2s;
+  letter-spacing:0.04em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.sidebar a:hover{color:var(--accent);border-color:var(--accent);}
+.sidebar a.active{color:var(--accent2);border-color:var(--accent2);}
+@media(max-width:1150px){.sidebar{display:none;}}
 </style>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <a href="#overview">Overview</a>
+  <a href="#features">Features</a>
+  <a href="#flow">System Flow</a>
+  <a href="#structure">File Structure</a>
+  <a href="#installation">Installation</a>
+  <a href="#configuration">Configuration</a>
+  <a href="#gamestate">GameState</a>
+  <a href="#roundmanager">RoundManager</a>
+  <a href="#integration">Integration</a>
+  <a href="#new-ability">New Ability</a>
+  <a href="#client">Client Setup</a>
+  <a href="#abilities">Included Abilities</a>
+  <a href="#tips">Tips</a>
+  <a href="#troubleshooting">Troubleshooting</a>
+</nav>
 
 <div class="wrap">
 
@@ -68,12 +110,12 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     <div class="role">Server-authoritative round management · Modular abilities · Anti-exploit protection</div>
   </header>
 
-  <div class="section">
+  <div class="section" id="overview">
     <div class="sec-label"><span>//</span>overview</div>
     <p class="about-text">A server-authoritative round and ability system designed for flexibility, security, and ease of expansion. Supports modular abilities with per-ability cooldowns, antispam protection, and a debug mode on both server and client to disable cooldowns and round checks during development.</p>
   </div>
 
-  <div class="section">
+  <div class="section" id="features">
     <div class="sec-label"><span>//</span>features</div>
     <div class="two-col">
       <div class="card">
@@ -91,7 +133,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="flow">
     <div class="sec-label"><span>//</span>system flow</div>
     <div class="card">
       <div class="card-desc" style="margin-bottom:0.75rem;">Every ability request travels through this pipeline. The server is the final authority at every step.</div>
@@ -109,7 +151,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="structure">
     <div class="sec-label"><span>//</span>file structure</div>
     <div class="card">
       <div class="file-tree">
@@ -135,7 +177,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="installation">
     <div class="sec-label"><span>//</span>installation</div>
     <div class="card">
       <div class="step-row">
@@ -161,23 +203,23 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     </div>
   </div>
 
-  <div class="section">
-  <div class="sec-label"><span>//</span>configuration</div>
-  <div class="card">
-    <div class="card-title">Round timing</div>
-    <div class="card-desc">Open <code style="color:var(--accent2)">GameState</code> in <code style="color:var(--accent2)">ServerScriptService/Modules</code> to adjust the two timing values at the top of the file. These are the only values you need to change to control how long each phase lasts.</div>
-    <div class="api-row" style="margin-top:0.75rem;">
-      <div class="api-name">GameState.RoundTime</div>
-      <div class="api-desc">Duration of each round in seconds. Default is 120.</div>
-    </div>
-    <div class="api-row">
-      <div class="api-name">GameState.Intermission</div>
-      <div class="api-desc">Duration of the lobby waiting period between rounds in seconds. Default is 15.</div>
+  <div class="section" id="configuration">
+    <div class="sec-label"><span>//</span>configuration</div>
+    <div class="card">
+      <div class="card-title">Round timing</div>
+      <div class="card-desc">Open <code style="color:var(--accent2)">GameState</code> in <code style="color:var(--accent2)">ServerScriptService/Modules</code> to adjust the two timing values at the top of the file. These are the only values you need to change to control how long each phase lasts.</div>
+      <div class="api-row" style="margin-top:0.75rem;">
+        <div class="api-name">GameState.RoundTime</div>
+        <div class="api-desc">Duration of each round in seconds. Default is 120.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState.Intermission</div>
+        <div class="api-desc">Duration of the lobby waiting period between rounds in seconds. Default is 15.</div>
+      </div>
     </div>
   </div>
-</div>
 
-  <div class="section">
+  <div class="section" id="gamestate">
     <div class="sec-label"><span>//</span>gamestate</div>
     <div class="card">
       <div class="card-desc" style="margin-bottom:0.75rem;">GameState is a lightweight module that tracks the current phase of the game and stores round timing settings. It is the single source of truth for round status, all other scripts read from it rather than tracking state themselves. Configure round length and intermission duration here.</div>
@@ -212,7 +254,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="roundmanager">
     <div class="sec-label"><span>//</span>roundmanager</div>
     <div class="card">
       <div class="card-desc" style="margin-bottom:0.75rem;">RoundManager is the main game loop script. It drives the intermission, round, and end phases in sequence, fires round status updates to all clients via RoundStatus, and handles all incoming ability requests from players. It also enforces a per-player request lock to prevent simultaneous ability spam.</div>
@@ -239,7 +281,7 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="integration">
     <div class="sec-label"><span>//</span>integrating with your own scripts</div>
 
     <div class="card">
@@ -341,10 +383,9 @@ AbilityEvent.OnClientEvent:<span class="fn">Connect</span>(<span class="kw">func
 <span class="cm">-- change to require at least 4 players</span>
 <span class="kw">if</span> #players >= <span class="num">4</span> <span class="kw">then</span></div>
     </div>
-
   </div>
 
-  <div class="section">
+  <div class="section" id="new-ability">
     <div class="sec-label"><span>//</span>creating a new ability</div>
     <div class="card">
       <div class="card-desc" style="margin-bottom:0.75rem;">Create a new <code style="color:var(--accent2)">ModuleScript</code> inside <code style="color:var(--accent2)">Modules > Abilities</code> and name it your ability. The system loads it automatically.</div>
@@ -363,7 +404,7 @@ Ability.Cooldown = <span class="num">5</span>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="client">
     <div class="sec-label"><span>//</span>client setup</div>
     <div class="card">
       <div class="card-desc" style="margin-bottom:0.75rem;">Abilities are defined on the client with a key binding and local cooldown for responsiveness. The server is the final authority and local cooldown is display only.</div>
@@ -393,7 +434,7 @@ Ability.Cooldown = <span class="num">5</span>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="abilities">
     <div class="sec-label"><span>//</span>included abilities</div>
     <div class="two-col">
       <div class="card">
@@ -407,7 +448,7 @@ Ability.Cooldown = <span class="num">5</span>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="tips">
     <div class="sec-label"><span>//</span>tips and security</div>
     <div class="card">
       <div class="tip-row">
@@ -433,7 +474,7 @@ Ability.Cooldown = <span class="num">5</span>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="troubleshooting">
     <div class="sec-label"><span>//</span>troubleshooting</div>
     <div class="card">
       <div class="step-row">
@@ -461,3 +502,18 @@ Ability.Cooldown = <span class="num">5</span>
   </footer>
 
 </div>
+
+<script>
+const sections = document.querySelectorAll('.section[id]');
+const links = document.querySelectorAll('.sidebar a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 140) current = s.id;
+  });
+  links.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
