@@ -41,7 +41,7 @@ header{display:flex;align-items:flex-start;justify-content:space-between;padding
 .social-platform{color:var(--muted);width:90px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;}
 .social-link{color:var(--accent);text-decoration:none;font-size:12px;}
 .social-status{color:var(--muted);font-size:11px;margin-left:auto;font-style:italic;}
-.cat-wrap{position:fixed;bottom:20px;right:20px;z-index:10;font-size:28px;animation:floatCat 3s ease-in-out infinite;cursor:default;user-select:none;filter:drop-shadow(0 0 8px rgba(127,119,221,0.4));}
+.cat-wrap{position:fixed;bottom:20px;right:20px;z-index:10;width:24px;height:24px;background:url('cat-img.png') center/contain no-repeat;animation:floatCat 3s ease-in-out infinite;cursor:default;user-select:none;filter:drop-shadow(0 0 8px rgba(127,119,221,0.4));}
 footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);}
 .cursor{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;vertical-align:text-bottom;animation:blink 0.8s step-end infinite;}
 .hidden{display:none;}
@@ -177,10 +177,11 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
   </footer>
 </div>
 
-<div class="cat-wrap hidden" id="e-cat">🐱</div>
+<div class="cat-wrap hidden" id="e-cat">
+</div>
 
 <script>
-const SPEED = 0.01;
+const SPEED = 0;
 const VARIANCE = 1;
 
 function show(id){ const el=document.getElementById(id); el.classList.remove('hidden'); return el; }
