@@ -266,7 +266,12 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
       <div class="card-title">Events</div>
       <div class="card-desc">Open <code style="color:var(--accent2)">EventService</code> in <code style="color:var(--accent2)">ServerScriptService/Services</code> to customise the event pool. Adjust durations, multipliers, and which cases each event targets. Set <code style="color:var(--accent2)">AUTO_EVENT_INTERVAL</code> to control how often a random event fires automatically, or set it to <code style="color:var(--accent2)">nil</code> to disable automatic events entirely and trigger them manually.</div>
     </div>
+
+	<div class="card">
+	  <div class="card-title">Inventory</div>
+	  <div class="card-desc">Open <code style="color:var(--accent2)">InventoryService</code> in <code style="color:var(--accent2)">ServerScriptService/Services</code> to adjust inventory behaviour. The <code style="color:var(--accent2)">MAX_STACK</code> constant near the top of the file controls how many of the same item a player can hold at once. The default is 9999. Sell values per tier are defined in <code style="color:var(--accent2)">TierConfig</code> under the <code style="color:var(--accent2)">sellValue</code> field rather than in InventoryService directly.</div>
   </div>
+ </div>
 
   <div class="section">
     <div class="sec-label"><span>//</span>remotes reference</div>
