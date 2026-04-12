@@ -1,0 +1,558 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#000;--surface:#080808;--border:#1a1a1a;
+  --accent:#7f77dd;--accent2:#5dcaa5;
+  --text:#e2e2f0;--muted:#666688;--dim:#2a2a3a;
+}
+body{font-family:'JetBrains Mono',monospace;background:#000;color:var(--text);min-height:100vh;overflow-x:hidden;}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+header{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3rem;}
+.tag-label{font-size:11px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
+.name{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,5vw,2.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.name span{color:var(--accent);}
+.role{font-size:13px;color:var(--muted);margin-top:0.8rem;line-height:1.8;}
+.status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent2);margin-top:1.2rem;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.section{margin-bottom:3rem;}
+.sec-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.sec-label span{color:var(--accent);margin-right:4px;}
+.about-text{font-size:13px;line-height:1.9;color:var(--text);max-width:640px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
+.card:hover{border-color:var(--dim);transform:translateX(4px);}
+.card:hover::before{opacity:1;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.8;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+@media(max-width:600px){.two-col,.three-col{grid-template-columns:1fr;}}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:1rem 0;}
+.flow-step{font-size:11px;color:var(--text);background:var(--dim);border-radius:3px;padding:4px 10px;}
+.flow-arrow{color:var(--accent);font-size:12px;}
+.code-block{background:#050508;border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;font-size:12px;line-height:1.9;color:#c3e88d;margin:0.75rem 0;overflow-x:auto;white-space:pre;}
+.kw{color:#c792ea;}
+.fn{color:#82aaff;}
+.cm{color:#546e7a;font-style:italic;}
+.num{color:#f78c6c;}
+.str{color:#c3e88d;}
+.tbl{color:#ffcb6b;}
+.file-tree{font-size:12px;line-height:2.1;color:var(--muted);}
+.file-tree .dir{color:var(--accent);}
+.file-tree .file{color:var(--text);}
+.file-tree .note{color:var(--muted);font-style:italic;}
+.file-tree .shared{color:var(--accent2);}
+.step-row{display:flex;gap:12px;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid var(--border);}
+.step-row:last-child{border-bottom:none;}
+.step-num{font-size:11px;color:var(--accent);min-width:20px;padding-top:2px;}
+.step-text{font-size:12px;color:var(--muted);line-height:1.7;}
+.step-text code{color:var(--accent2);font-size:11px;}
+.tip-row{display:flex;gap:10px;align-items:flex-start;padding:0.5rem 0;}
+.tip-icon{color:var(--accent2);font-size:11px;min-width:16px;padding-top:2px;}
+.tip-text{font-size:12px;color:var(--muted);line-height:1.7;}
+.tip-text code{color:var(--accent2);}
+.warn code{color:#f78c6c;}
+.api-row{display:flex;gap:12px;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border);}
+.api-row:last-child{border-bottom:none;}
+.api-name{font-size:11px;color:var(--accent2);min-width:190px;padding-top:2px;word-break:break-all;}
+.api-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.remote-row{display:flex;gap:12px;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border);}
+.remote-row:last-child{border-bottom:none;}
+.remote-name{font-size:11px;color:var(--accent2);min-width:140px;padding-top:2px;}
+.remote-type{font-size:10px;color:var(--accent);min-width:110px;padding-top:3px;}
+.remote-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);flex-wrap:wrap;gap:8px;}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="tag-label">// documentation.v1</div>
+    <div class="name">Modular RNG<br><span>Case System</span></div>
+    <div class="role">Weighted RNG · Pity system · Inventory · Currency · Global events · DataStore</div>
+  </header>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>overview</div>
+    <p class="about-text">A fully modular RNG and case-opening framework for Roblox. Built around a weighted tier rolling engine with real pity tracking, a complete inventory and currency system, timed global events, and secure DataStore saving. Every system is server-authoritative and exploit-proof. All client logic is intentionally dumb, it fires requests and displays results. All rolls, validation, and data mutations happen on the server.</p>
+  </div>
+
+	<div class="section">
+	  <div class="sec-label"><span>//</span>showcase</div>
+	  <div class="card" style="padding:0">
+		<video
+		  src="https://fynzel.eu/media/2026-04-12 07-35-27.mp4"
+		  controls
+		  style="width:100%;border-radius:6px;display:block;"
+		></video>
+	  </div>
+	</div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>features</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Weighted RNG Engine</div>
+        <div class="card-desc">Tier rolling uses relative weights so odds never need to sum to 100. A luck multiplier scales rarer tiers independently. Includes simulation and odds utilities for testing weight tables before shipping.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Pity System</div>
+        <div class="card-desc">Per-tier pity counters are tracked per case per player. When a player hits the cap for a tier, the next roll guarantees it. Counters persist across sessions via DataStore.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Inventory and Selling</div>
+        <div class="card-desc">Items stack per player. Players can sell individual items or all duplicates at once for coins. Sell value is determined by tier. Equipped items are tracked per slot.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Currency System</div>
+        <div class="card-desc">Supports coins and gems independently. All balance changes go through CurrencyService with hard cap validation. Clients never touch currency values directly.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Global Events</div>
+        <div class="card-desc">Timed server events can boost luck, discount case costs, or double sell payouts. Events auto-expire and notify all clients on start and end. New joining players receive the current event state immediately.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">DataStore</div>
+        <div class="card-desc">Player data loads on join, saves on leave, and autosaves every 60 seconds. A BindToClose handler saves all connected players on server shutdown. New data fields are reconciled automatically for existing players.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>case opening flow</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Every case open follows this exact 9-step pipeline on the server. The client receives the result only after all steps complete.</div>
+      <div class="flow">
+        <div class="flow-step">1. Validate request</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">2. Charge currency</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">3. Check pity</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">4. Roll tier</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">5. Roll item</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">6. Award item</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">7. Update pity</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">8. Update stats</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">9. Return result</div>
+      </div>
+      <div class="card-desc" style="margin-top:0.5rem;">If an item pool or roll fails after currency is charged, the player is automatically refunded. The client then plays the reveal animation and fires ClaimReward, which the server validates before confirming.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>file structure</div>
+    <div class="card">
+      <div class="file-tree">
+        <div><span class="dir">ServerScriptService/</span></div>
+        <div>&nbsp;&nbsp;<span class="file">Main</span> &nbsp;<span class="note">Script - boots all services and wires all remotes</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">Services/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">DataService</span> &nbsp;<span class="note">ModuleScript - load, save, autosave</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">RNGService</span> &nbsp;<span class="note">ModuleScript - weighted roll engine</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">CurrencyService</span> &nbsp;<span class="note">ModuleScript - coins and gems</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">InventoryService</span> &nbsp;<span class="note">ModuleScript - items, equip, sell</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">PityService</span> &nbsp;<span class="note">ModuleScript - roll tracking and guarantees</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">CaseService</span> &nbsp;<span class="note">ModuleScript - full case open orchestrator</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">EventService</span> &nbsp;<span class="note">ModuleScript - timed global events</span></div>
+        <br>
+        <div><span class="dir">StarterPlayerScripts/</span></div>
+        <div>&nbsp;&nbsp;<span class="file">ClientMain</span> &nbsp;<span class="note">LocalScript - boots controllers and wires navigation</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">Controllers/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">CurrencyController</span> &nbsp;<span class="note">ModuleScript - HUD balance display</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">CaseController</span> &nbsp;<span class="note">ModuleScript - case UI and animations</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">InventoryController</span> &nbsp;<span class="note">ModuleScript - inventory UI</span></div>
+        <br>
+        <div><span class="dir">ReplicatedStorage/</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">Shared/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="shared">TierConfig</span> &nbsp;<span class="note">ModuleScript - all tier definitions</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="shared">CaseDefinitions</span> &nbsp;<span class="note">ModuleScript - all cases and item pools</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="shared">Types</span> &nbsp;<span class="note">ModuleScript - shared type definitions</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">Remotes/</span> &nbsp;<span class="note">all RemoteEvents and RemoteFunctions live here</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>remotes reference</div>
+    <div class="card">
+      <div class="remote-row">
+        <div class="remote-name">OpenCase</div>
+        <div class="remote-type">RemoteFunction</div>
+        <div class="remote-desc">Client invokes to open a case. Returns the full result table including item, tier, balances, and pity summary.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">GetCaseData</div>
+        <div class="remote-type">RemoteFunction</div>
+        <div class="remote-desc">Client invokes when opening the case UI. Returns odds, pity progress, balances, and case definition.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">GetInventory</div>
+        <div class="remote-type">RemoteFunction</div>
+        <div class="remote-desc">Client invokes when opening the inventory UI. Returns the full inventory and equipped tables.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">GetBalances</div>
+        <div class="remote-type">RemoteFunction</div>
+        <div class="remote-desc">Client invokes on join and on demand. Returns current coin and gem balances.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">ClaimReward</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Client fires after the reveal animation finishes. Server validates a pending reward exists before confirming.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">RewardGranted</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Server fires to the client after ClaimReward is validated. Contains final item, tier, balances, and pity data.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">SellItem</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Client fires with an item id to sell one instance. Server validates ownership before removing and paying out.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">SellDupes</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Client fires to sell all duplicate items at once, keeping one of each. Server handles the full sweep.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">EquipItem</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Client fires with an item id and slot string. Server validates ownership before equipping.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">UnequipSlot</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Client fires with a slot string to clear that slot.</div>
+      </div>
+      <div class="remote-row">
+        <div class="remote-name">EventNotify</div>
+        <div class="remote-type">RemoteEvent</div>
+        <div class="remote-desc">Server fires to all clients when a global event starts or ends. Payload includes event name, description, and duration.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>services</div>
+
+    <div class="card">
+      <div class="card-title">DataService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Foundation of the entire system. All other services read and write player data through DataService only. Never access DataStore directly from any other service.</div>
+      <div class="api-row">
+        <div class="api-name">DataService.Get(player)</div>
+        <div class="api-desc">Returns the live data table for a player. All mutations on this reference are reflected immediately.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">DataService.GetKey(player, key)</div>
+        <div class="api-desc">Returns a specific field from a player's data table.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">DataService.Set(player, key, value)</div>
+        <div class="api-desc">Sets a specific field in a player's data. Does not save immediately - autosave and leave save handle persistence.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">DataService.Save(player)</div>
+        <div class="api-desc">Force-saves a player's data immediately. Use sparingly as DataStore has rate limits.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">RNGService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Pure stateless roll engine. No player data, no dependencies. Weights are relative and do not need to sum to any specific value.</div>
+      <div class="api-row">
+        <div class="api-name">RNGService.RollTier(tierTable, luckMultiplier)</div>
+        <div class="api-desc">Rolls a tier from a weighted table. Luck multiplier boosts all non-common tiers proportionally.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">RNGService.RollItem(itemPool)</div>
+        <div class="api-desc">Rolls a single item from a pool of items. Items within a tier can have individual weights.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">RNGService.GetOdds(tierTable)</div>
+        <div class="api-desc">Returns a table of tier names to percentage chances. Use this to display odds in the case UI.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">RNGService.Simulate(tierTable, rolls, luck)</div>
+        <div class="api-desc">Simulates N rolls and returns tier frequency. Use in Studio to verify weight tables before shipping.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">CurrencyService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Handles all coin and gem mutations. Never set currency directly via DataService. All operations validate the currency type and amount. Balances are capped server-side to prevent overflow.</div>
+      <div class="api-row">
+        <div class="api-name">CurrencyService.GetBalance(player, type)</div>
+        <div class="api-desc">Returns a player's current balance for "currency" or "gems".</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">CurrencyService.CanAfford(player, type, amount)</div>
+        <div class="api-desc">Returns true if the player has enough of the given currency.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">CurrencyService.Add(player, type, amount)</div>
+        <div class="api-desc">Adds currency to a player's balance. Clamps to the hard cap.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">CurrencyService.Spend(player, type, amount)</div>
+        <div class="api-desc">Deducts currency if the player can afford it. Returns true on success and false if insufficient funds.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">CurrencyService.GetAllBalances(player)</div>
+        <div class="api-desc">Returns both balances at once as a table. Use this when sending balance updates to the client.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">InventoryService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Manages item ownership, stacking, equipping, and selling. Inventory is stored as itemId to count. Equipped items are stored as slot to itemId. Returns copies of tables to prevent external mutation.</div>
+      <div class="api-row">
+        <div class="api-name">InventoryService.AddItem(player, itemId)</div>
+        <div class="api-desc">Adds one instance of an item to inventory. Stacks up to MAX_STACK (9999).</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">InventoryService.RemoveItem(player, itemId)</div>
+        <div class="api-desc">Removes one instance of an item. Cleans up zero-count entries automatically.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">InventoryService.SellItem(player, itemId)</div>
+        <div class="api-desc">Removes one item and pays out its tier sell value in coins. Returns the amount earned or false on failure.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">InventoryService.SellDuplicates(player)</div>
+        <div class="api-desc">Sells all extras keeping one of each item. Returns total coins earned.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">InventoryService.EquipItem(player, itemId, slot)</div>
+        <div class="api-desc">Equips an item to a named slot. Validates ownership before equipping.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">PityService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Tracks how many rolls a player has done per case without hitting each tier. Pity counters are stored as caseId_tierName keys. Only tiers with a pityMax set in TierConfig are tracked.</div>
+      <div class="api-row">
+        <div class="api-name">PityService.GetGuaranteedTier(player, caseId)</div>
+        <div class="api-desc">Returns the rarest tier the player has hit pity on, or nil if none. CaseService calls this before every roll.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">PityService.Track(player, caseId, rolledTier)</div>
+        <div class="api-desc">Increments counters for all tiers not hit this roll and resets the counter for the tier that was hit.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">PityService.GetPitySummary(player, caseId)</div>
+        <div class="api-desc">Returns count, max, and progress percentage per tier. Use this to render pity progress bars in the UI.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">PityService.ResetAll(player)</div>
+        <div class="api-desc">Clears all pity counters across all cases. Call this on rebirth.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">CaseService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">The central orchestrator. Calls every other service in sequence to complete a full case open. Includes a per-player cooldown to prevent spam opens. If any step fails after currency is charged, the player is automatically refunded.</div>
+      <div class="api-row">
+        <div class="api-name">CaseService.OpenCase(player, caseId)</div>
+        <div class="api-desc">Runs the full 9-step open pipeline. Returns a result table with success, item, tier, tierData, wasGuaranteed, pitySummary, newBalances, and totalRolls.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">CaseService.GetCaseData(player, caseId)</div>
+        <div class="api-desc">Returns all data needed to populate the case UI in one call. Call this on UI open, not on every roll.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">EventService</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Manages timed global events that modify game behaviour. Only one event can run at a time. Events auto-expire and CaseService reads the active modifiers on every open.</div>
+      <div class="api-row">
+        <div class="api-name">EventService.StartEvent(eventId)</div>
+        <div class="api-desc">Starts a named event from the event pool. Notifies all clients via EventNotify.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">EventService.GetLuckMultiplier(baseLuck, caseId)</div>
+        <div class="api-desc">Returns the effective luck value factoring in any active luck_boost event.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">EventService.GetCaseCost(baseCost, caseId)</div>
+        <div class="api-desc">Returns the effective case cost factoring in any active cost_discount event.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">EventService.GetCurrencyMultiplier()</div>
+        <div class="api-desc">Returns the sell payout multiplier for any active double_currency event.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>shared modules</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">TierConfig</div>
+        <div class="card-desc">Single source of truth for all tier definitions. Both server and client read from here. Each tier defines weight, color, label, pityMax, and sellValue. Call TierConfig.GetRollTable() to get the table RNGService expects rather than building it manually.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">CaseDefinitions</div>
+        <div class="card-desc">Pure data module. Defines every case with its cost, currency type, image, and item pools per tier. Call CaseDefinitions.GetItemPool(caseId, tierName) to fetch the pool for a specific tier after rolling.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Types</div>
+      <div class="card-desc">Shared Luau type definitions for every data structure in the system including Item, TierData, CaseDef, OpenResult, PitySummary, PlayerData, and EventData. Import and annotate variables for Studio type checking and as living documentation.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>adding a new case</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Open <code style="color:var(--accent2)">CaseDefinitions</code> and add a new entry to the Cases table following this structure. No other file needs to change.</div>
+      <div class="code-block"><span class="tbl">CaseDefinitions</span>.Cases = {
+    <span class="cm">-- existing cases above</span>
+
+    my_new_case = {
+        name     = <span class="str">"My New Case"</span>,
+        cost     = <span class="num">200</span>,
+        currency = <span class="str">"currency"</span>,  <span class="cm">-- or "gems"</span>
+        image    = <span class="str">"rbxassetid://YOUR_ID"</span>,
+        items    = {
+            Common = {
+                { id = <span class="str">"new_001"</span>, name = <span class="str">"Item Name"</span>, weight = <span class="num">100</span>,
+                  image = <span class="str">"rbxassetid://0"</span>, description = <span class="str">"Description here"</span> },
+            },
+            Rare = {
+                { id = <span class="str">"new_002"</span>, name = <span class="str">"Rare Item"</span>, weight = <span class="num">100</span>,
+                  image = <span class="str">"rbxassetid://0"</span>, description = <span class="str">"Description here"</span> },
+            },
+            <span class="cm">-- add pools for each tier you want in this case</span>
+        },
+    },
+}</div>
+      <div class="tip-row" style="margin-top:0.5rem;">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Item ids must be unique across all cases. Use a prefix per case to avoid collisions, for example <code>new_001</code> vs <code>starter_001</code>.</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Then add a button for the new case in <code>ClientMain</code> inside the caseButtons table.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>adding a new event</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Open <code style="color:var(--accent2)">EventService</code> and add a new entry to the EVENT_POOL table. The auto-event system will pick it up automatically.</div>
+      <div class="code-block">{
+    id          = <span class="str">"my_event"</span>,
+    name        = <span class="str">"My Event"</span>,
+    description = <span class="str">"Something happens for 90 seconds!"</span>,
+    duration    = <span class="num">90</span>,
+    type        = <span class="str">"luck_boost"</span>,  <span class="cm">-- luck_boost | cost_discount | double_currency</span>
+    value       = <span class="num">2</span>,              <span class="cm">-- multiplier or discount factor</span>
+    targetCase  = <span class="kw">nil</span>,           <span class="cm">-- nil = all cases, or a specific caseId string</span>
+},</div>
+      <div class="tip-row" style="margin-top:0.5rem;">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">To trigger an event manually from the server console during testing, run <code>require(game.ServerScriptService.Services.EventService).StartEvent("my_event")</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>adding a new tier</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Open <code style="color:var(--accent2)">TierConfig</code>. Add the tier name to TierOrder in the correct position from most common to rarest, then add its definition to the Tiers table.</div>
+      <div class="code-block"><span class="tbl">TierConfig</span>.TierOrder = {
+    <span class="str">"Common"</span>, <span class="str">"Uncommon"</span>, <span class="str">"Rare"</span>, <span class="str">"Epic"</span>,
+    <span class="str">"Legendary"</span>, <span class="str">"Mythic"</span>, <span class="str">"Brainrot"</span>,
+    <span class="str">"NewTier"</span>,  <span class="cm">-- add in rarity order</span>
+}
+
+<span class="tbl">TierConfig</span>.Tiers.NewTier = {
+    weight    = <span class="num">0.01</span>,
+    color     = <span class="str">"#ffffff"</span>,
+    label     = <span class="str">"NEW TIER"</span>,
+    pityMax   = <span class="num">5000</span>,
+    sellValue = <span class="num">100000</span>,
+}</div>
+      <div class="tip-row" style="margin-top:0.5rem;">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">TierOrder position matters. RNGService uses index 1 as most common when applying luck multipliers. Never shuffle this list.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>tips and security</div>
+    <div class="card">
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">The client is a display layer only. It fires remotes and shows results. All logic including rolls, cooldowns, and currency changes happen server-side.</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Never call <code>DataService.Set(player, "currency", x)</code> directly from other services. Always go through <code>CurrencyService.Add()</code> or <code>CurrencyService.Spend()</code> so validation runs.</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Item ids must be globally unique across all cases. Use a case-specific prefix on every id.</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Run <code>RNGService.Simulate(TierConfig.GetRollTable(), 10000)</code> in the Studio server console to verify your weight distribution before shipping.</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">If you add a new field to the default player data, add it to both <code>getDefaultData()</code> in DataService and the <code>PlayerData</code> type in Types. Existing players get the new field via the reconcile function on next load.</div>
+      </div>
+      <div class="tip-row warn">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text warn">Delete or disable <code>DevTestUI</code> before going live. It exposes every system directly to the player.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>troubleshooting</div>
+    <div class="card">
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Case open returns insufficient_funds</strong> - check the player's currency balance and confirm the case cost and currency type match in CaseDefinitions</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Pity not triggering</strong> - confirm pityMax is set on the tier in TierConfig. Common and Uncommon have nil pityMax by default</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Data not saving</strong> - check the DataStore name in DataService. If you changed it, existing player data is under the old key. Enable API services in game settings if DataStore calls fail entirely</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Item not appearing in inventory</strong> - verify the item id in CaseDefinitions is unique and does not collide with another case's item ids</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Remote errors on client</strong> - confirm all remotes exist in ReplicatedStorage/Remotes with the correct type. OpenCase, GetCaseData, GetInventory, and GetBalances must be RemoteFunctions. All others must be RemoteEvents</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Nothing happens on open</strong> - check the server output for errors. The most common cause is a service failing to require due to a wrong script path</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>modular RNG case system · colinizer101</div>
+    <div style="color:var(--accent)">documentation.v1</div>
+  </footer>
+
+</div>

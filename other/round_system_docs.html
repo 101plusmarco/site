@@ -1,0 +1,266 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#000;--surface:#080808;--border:#1a1a1a;
+  --accent:#7f77dd;--accent2:#5dcaa5;
+  --text:#e2e2f0;--muted:#666688;--dim:#2a2a3a;
+}
+body{font-family:'JetBrains Mono',monospace;background:#000;color:var(--text);min-height:100vh;overflow-x:hidden;}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+header{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3rem;}
+.tag-label{font-size:11px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
+.name{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,5vw,2.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+.name span{color:var(--accent);}
+.role{font-size:13px;color:var(--muted);margin-top:0.8rem;line-height:1.8;}
+.status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent2);margin-top:1.2rem;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.section{margin-bottom:3rem;}
+.sec-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.sec-label span{color:var(--accent);margin-right:4px;}
+.about-text{font-size:13px;line-height:1.9;color:var(--text);max-width:640px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
+.card:hover{border-color:var(--dim);transform:translateX(4px);}
+.card:hover::before{opacity:1;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.8;}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:1rem 0;}
+.flow-step{font-size:11px;color:var(--text);background:var(--dim);border-radius:3px;padding:4px 10px;}
+.flow-arrow{color:var(--accent);font-size:12px;}
+.code-block{background:#050508;border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;font-size:12px;line-height:1.9;color:#c3e88d;margin:0.75rem 0;overflow-x:auto;white-space:pre;}
+.kw{color:#c792ea;}
+.fn{color:#82aaff;}
+.cm{color:#546e7a;font-style:italic;}
+.num{color:#f78c6c;}
+.str{color:#c3e88d;}
+.file-tree{font-size:12px;line-height:2;color:var(--muted);}
+.file-tree .dir{color:var(--accent);}
+.file-tree .file{color:var(--text);}
+.file-tree .note{color:var(--muted);font-style:italic;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:560px){.two-col{grid-template-columns:1fr;}}
+.step-row{display:flex;gap:12px;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid var(--border);}
+.step-row:last-child{border-bottom:none;}
+.step-num{font-size:11px;color:var(--accent);min-width:20px;padding-top:2px;}
+.step-text{font-size:12px;color:var(--muted);line-height:1.7;}
+.step-text code{color:var(--accent2);font-size:11px;}
+.tip-row{display:flex;gap:10px;align-items:flex-start;padding:0.5rem 0;}
+.tip-icon{color:var(--accent2);font-size:11px;min-width:16px;padding-top:2px;}
+.tip-text{font-size:12px;color:var(--muted);line-height:1.7;}
+.tip-text code{color:var(--accent2);}
+.warn-text code{color:#f78c6c;}
+footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);flex-wrap:wrap;gap:8px;}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="tag-label">// documentation.v1</div>
+    <div class="name">Modular Round &amp;<br><span>Ability System</span></div>
+    <div class="role">Server-authoritative round management · Modular abilities · Anti-exploit protection</div>
+  </header>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>overview</div>
+    <p class="about-text">A server-authoritative round and ability system designed for flexibility, security, and ease of expansion. Supports modular abilities with per-ability cooldowns, antispam protection, and a debug mode on both server and client to disable cooldowns and round checks during development.</p>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>features</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Security</div>
+        <div class="card-desc">All abilities are executed server-side. Client input is validated before any action runs. Cooldowns and round checks enforce against remote spam and exploit abuse.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Modularity</div>
+        <div class="card-desc">Each ability is a self-contained ModuleScript. The system loads all abilities automatically. Add new abilities without touching core logic.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Debug Mode</div>
+      <div class="card-desc">Both the server and client scripts expose a debug mode flag that disables cooldowns and round checks. Flip it off before shipping.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>system flow</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Every ability request travels through this pipeline. The server is the final authority at every step.</div>
+      <div class="flow">
+        <div class="flow-step">Client input</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">AbilityEvent remote</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">AbilityManager validation</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Ability execution</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Result to client</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>file structure</div>
+    <div class="card">
+      <div class="file-tree">
+        <div><span class="dir">ServerScriptService/</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">Modules/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">AbilityManager</span> &nbsp;<span class="note">validates and dispatches requests</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">GameState</span> &nbsp;<span class="note">tracks round status</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">Abilities/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">Dash</span> &nbsp;<span class="note">included example</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">BigHead</span> &nbsp;<span class="note">included example</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file" style="color:var(--accent)">YourAbility</span> &nbsp;<span class="note">add yours here</span></div>
+        <div>&nbsp;&nbsp;<span class="file">RoundManager</span> &nbsp;<span class="note">main server script</span></div>
+        <br>
+        <div><span class="dir">StarterPlayerScripts/</span></div>
+        <div>&nbsp;&nbsp;<span class="file">AbilityClient</span> &nbsp;<span class="note">client script</span></div>
+        <br>
+        <div><span class="dir">ReplicatedStorage/</span></div>
+        <div>&nbsp;&nbsp;<span class="dir">Remotes/</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">AbilityEvent</span> &nbsp;<span class="note">RemoteEvent</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">RoundStatus</span> &nbsp;<span class="note">RemoteEvent</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>installation</div>
+    <div class="card">
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-text">Insert the <code>Modules</code> folder into <code>ServerScriptService</code></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-text">Insert the <code>Remotes</code> folder into <code>ReplicatedStorage</code></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-text">Confirm <code>AbilityEvent</code> and <code>RoundStatus</code> exist inside Remotes</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div class="step-text">Insert <code>RoundManager</code> into <code>ServerScriptService</code></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">05</div>
+        <div class="step-text">Insert <code>AbilityClient</code> into <code>StarterPlayerScripts</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>creating a new ability</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Create a new <code style="color:var(--accent2)">ModuleScript</code> inside <code style="color:var(--accent2)">Modules > Abilities</code> and name it your ability. The system loads it automatically.</div>
+      <div class="code-block"><span class="cm">-- Modules/Abilities/Fireball</span>
+<span class="kw">local</span> Ability = {}
+
+Ability.Cooldown = <span class="num">5</span>
+
+<span class="kw">function</span> <span class="fn">Ability:Use</span>(player, data)
+    <span class="cm">-- your ability logic here</span>
+    <span class="fn">print</span>(player.Name .. <span class="str">" used Fireball"</span>)
+    <span class="kw">return true</span>
+<span class="kw">end</span>
+
+<span class="kw">return</span> Ability</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>client setup</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">Abilities are defined on the client with a key binding and local cooldown for responsiveness. The server is the final authority and local cooldown is display only.</div>
+      <div class="code-block">Dash = {
+    Key = Enum.KeyCode.Q,
+    Cooldown = <span class="num">10</span>,
+    LastUse = <span class="num">0</span>
+}</div>
+      <div style="margin-top:0.75rem;">
+        <div class="step-row">
+          <div class="step-num">01</div>
+          <div class="step-text">Player presses the bound key</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">02</div>
+          <div class="step-text">Client fires a request to the server via <code>AbilityEvent</code></div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">03</div>
+          <div class="step-text">Server validates cooldown, round state, and spam protection</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">04</div>
+          <div class="step-text">Ability executes if all checks pass and the result is returned to the client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>included abilities</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Dash</div>
+        <div class="card-desc">Moves the player forward quickly using direction input. Short-duration movement burst with its own cooldown.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">BigHead</div>
+        <div class="card-desc">Temporarily increases the player's head size. Automatically resets after a few seconds.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>tips and security</div>
+    <div class="card">
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Always <code>return true</code> if the ability succeeds and <code>return false</code> if it fails</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Keep all ability logic inside the module and never trust or rely on client-sent data</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">Server cooldowns are the authority and client cooldown is for UI responsiveness only</div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text warn-text">Disable <code>debug mode</code> on both server and client before going live</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>troubleshooting</div>
+    <div class="card">
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Ability not firing</strong> - check that <code>AbilityEvent</code> and <code>RoundStatus</code> RemoteEvents exist in <code>ReplicatedStorage/Remotes</code></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Cooldown not working</strong> - confirm <code>Cooldown</code> is set inside the ability module</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Nothing happens</strong> - check the output for errors and verify all scripts are in the correct locations</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>modular round and ability system · colinizer101</div>
+    <div style="color:var(--accent)">documentation.v1</div>
+  </footer>
+
+</div>
