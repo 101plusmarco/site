@@ -27,6 +27,8 @@ header{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3
 .card:hover::before{opacity:1;}
 .card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
 .card-desc{font-size:12px;color:var(--muted);line-height:1.8;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:560px){.two-col{grid-template-columns:1fr;}}
 .flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:1rem 0;}
 .flow-step{font-size:11px;color:var(--text);background:var(--dim);border-radius:3px;padding:4px 10px;}
 .flow-arrow{color:var(--accent);font-size:12px;}
@@ -36,17 +38,20 @@ header{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3
 .cm{color:#546e7a;font-style:italic;}
 .num{color:#f78c6c;}
 .str{color:#c3e88d;}
+.tbl{color:#ffcb6b;}
 .file-tree{font-size:12px;line-height:2;color:var(--muted);}
 .file-tree .dir{color:var(--accent);}
 .file-tree .file{color:var(--text);}
 .file-tree .note{color:var(--muted);font-style:italic;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-@media(max-width:560px){.two-col{grid-template-columns:1fr;}}
 .step-row{display:flex;gap:12px;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid var(--border);}
 .step-row:last-child{border-bottom:none;}
 .step-num{font-size:11px;color:var(--accent);min-width:20px;padding-top:2px;}
 .step-text{font-size:12px;color:var(--muted);line-height:1.7;}
 .step-text code{color:var(--accent2);font-size:11px;}
+.api-row{display:flex;gap:12px;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border);}
+.api-row:last-child{border-bottom:none;}
+.api-name{font-size:11px;color:var(--accent2);min-width:200px;padding-top:2px;word-break:break-all;}
+.api-desc{font-size:12px;color:var(--muted);line-height:1.6;}
 .tip-row{display:flex;gap:10px;align-items:flex-start;padding:0.5rem 0;}
 .tip-icon{color:var(--accent2);font-size:11px;min-width:16px;padding-top:2px;}
 .tip-text{font-size:12px;color:var(--muted);line-height:1.7;}
@@ -109,17 +114,18 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
     <div class="card">
       <div class="file-tree">
         <div><span class="dir">ServerScriptService/</span></div>
+        <div>&nbsp;&nbsp;<span class="file">RoundManager</span> &nbsp;<span class="note">Script - main game loop and ability event handler</span></div>
         <div>&nbsp;&nbsp;<span class="dir">Modules/</span></div>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">AbilityManager</span> &nbsp;<span class="note">validates and dispatches requests</span></div>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">GameState</span> &nbsp;<span class="note">tracks round status</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">GameState</span> &nbsp;<span class="note">ModuleScript - round status and timing config</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">AbilityManager</span> &nbsp;<span class="note">ModuleScript - validates and executes abilities</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">PlayerManager</span> &nbsp;<span class="note">ModuleScript - tracks connected players</span></div>
         <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">Abilities/</span></div>
         <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">Dash</span> &nbsp;<span class="note">included example</span></div>
         <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">BigHead</span> &nbsp;<span class="note">included example</span></div>
         <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file" style="color:var(--accent)">YourAbility</span> &nbsp;<span class="note">add yours here</span></div>
-        <div>&nbsp;&nbsp;<span class="file">RoundManager</span> &nbsp;<span class="note">main server script</span></div>
         <br>
         <div><span class="dir">StarterPlayerScripts/</span></div>
-        <div>&nbsp;&nbsp;<span class="file">AbilityClient</span> &nbsp;<span class="note">client script</span></div>
+        <div>&nbsp;&nbsp;<span class="file">AbilityClient</span> &nbsp;<span class="note">LocalScript - handles input and sends requests</span></div>
         <br>
         <div><span class="dir">ReplicatedStorage/</span></div>
         <div>&nbsp;&nbsp;<span class="dir">Remotes/</span></div>
@@ -153,6 +159,189 @@ footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justif
         <div class="step-text">Insert <code>AbilityClient</code> into <code>StarterPlayerScripts</code></div>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+  <div class="sec-label"><span>//</span>configuration</div>
+  <div class="card">
+    <div class="card-title">Round timing</div>
+    <div class="card-desc">Open <code style="color:var(--accent2)">GameState</code> in <code style="color:var(--accent2)">ServerScriptService/Modules</code> to adjust the two timing values at the top of the file. These are the only values you need to change to control how long each phase lasts.</div>
+    <div class="api-row" style="margin-top:0.75rem;">
+      <div class="api-name">GameState.RoundTime</div>
+      <div class="api-desc">Duration of each round in seconds. Default is 120.</div>
+    </div>
+    <div class="api-row">
+      <div class="api-name">GameState.Intermission</div>
+      <div class="api-desc">Duration of the lobby waiting period between rounds in seconds. Default is 15.</div>
+    </div>
+  </div>
+</div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>gamestate</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">GameState is a lightweight module that tracks the current phase of the game and stores round timing settings. It is the single source of truth for round status, all other scripts read from it rather than tracking state themselves. Configure round length and intermission duration here.</div>
+      <div class="api-row">
+        <div class="api-name">GameState.RoundTime</div>
+        <div class="api-desc">Duration of a round in seconds. Default is 120. Change this to control how long each round lasts.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState.Intermission</div>
+        <div class="api-desc">Duration of intermission in seconds. Default is 15. This is the gap between rounds where players wait in the lobby.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState.Status</div>
+        <div class="api-desc">The current game phase. Possible values are "Waiting", "Intermission", "Round", and "Ending". Read this from any server script to check what phase the game is in.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState:SetStatus(status)</div>
+        <div class="api-desc">Sets the current game phase. Called internally by RoundManager. You can call this from your own scripts to force a phase change, for example when a win condition is met.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState:GetStatus()</div>
+        <div class="api-desc">Returns the current phase string. Use this to gate logic in your own scripts. For example, only allow certain actions during "Round".</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState:GetRoundTime()</div>
+        <div class="api-desc">Returns the configured round duration. RoundManager uses this to run the countdown.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">GameState:GetIntermission()</div>
+        <div class="api-desc">Returns the configured intermission duration. RoundManager uses this to run the lobby countdown.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>roundmanager</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom:0.75rem;">RoundManager is the main game loop script. It drives the intermission, round, and end phases in sequence, fires round status updates to all clients via RoundStatus, and handles all incoming ability requests from players. It also enforces a per-player request lock to prevent simultaneous ability spam.</div>
+      <div class="api-row">
+        <div class="api-name">RoundManager:StartIntermission()</div>
+        <div class="api-desc">Sets GameState to "Intermission" and runs a countdown from GameState.Intermission to 0, firing RoundStatus to all clients each second. Yields until complete.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">RoundManager:StartRound()</div>
+        <div class="api-desc">Sets GameState to "Round" and runs a countdown from GameState.RoundTime to 0, firing RoundStatus to all clients each second. Yields until complete.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">RoundManager:EndRound()</div>
+        <div class="api-desc">Sets GameState to "Ending", fires a RoundEnded event to all clients, then waits 5 seconds before the loop continues to intermission.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">AbilityEvent.OnServerEvent</div>
+        <div class="api-desc">Listens for ability requests from clients. Validates the ability name type, applies the per-player request lock, calls AbilityManager:UseAbility(), then fires the result back to the requesting client.</div>
+      </div>
+      <div class="api-row">
+        <div class="api-name">Minimum player check</div>
+        <div class="api-desc">The main loop checks PlayerManager:GetPlayers() after each intermission. If fewer than 1 player is connected, the round is skipped and the loop waits 3 seconds before trying again. Change the threshold to suit your game.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label"><span>//</span>integrating with your own scripts</div>
+
+    <div class="card">
+      <div class="card-title">Checking the current game phase</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">Require GameState from any server script to read the current phase and gate your own logic accordingly.</div>
+      <div class="code-block"><span class="kw">local</span> GameState = <span class="fn">require</span>(game.ServerScriptService.Modules.GameState)
+
+<span class="cm">-- only allow something during an active round</span>
+<span class="kw">if</span> GameState:<span class="fn">GetStatus</span>() == <span class="str">"Round"</span> <span class="kw">then</span>
+    <span class="cm">-- your logic here</span>
+<span class="kw">end</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Ending a round early</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">If your game has a win condition - last player standing, score threshold, objective complete. You can force the round to end by setting the status directly. RoundManager's countdown loop checks the status on each tick and will exit when it detects "Ending".</div>
+      <div class="code-block"><span class="kw">local</span> GameState = <span class="fn">require</span>(game.ServerScriptService.Modules.GameState)
+<span class="kw">local</span> Remotes = game.ReplicatedStorage.Remotes
+
+<span class="cm">-- call this from any server script when the win condition is met</span>
+<span class="kw">local</span> <span class="kw">function</span> <span class="fn">endRoundEarly</span>(winner)
+    GameState:<span class="fn">SetStatus</span>(<span class="str">"Ending"</span>)
+    Remotes.RoundStatus:<span class="fn">FireAllClients</span>(<span class="str">"RoundEnded"</span>, winner)
+<span class="kw">end</span></div>
+      <div class="tip-row" style="margin-top:0.25rem;">
+        <div class="tip-icon">▸</div>
+        <div class="tip-text">To make RoundManager actually respect an early end, add a status check inside the StartRound countdown loop so it breaks when GameState is no longer "Round".</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Listening for round events on the client</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">RoundStatus fires to all clients every second during intermission and the round, and once on round end. Connect to it in any LocalScript to update your UI or trigger client-side effects.</div>
+      <div class="code-block"><span class="kw">local</span> RoundStatus = game.ReplicatedStorage.Remotes.RoundStatus
+
+RoundStatus.OnClientEvent:<span class="fn">Connect</span>(<span class="kw">function</span>(phase, timeRemaining)
+    <span class="kw">if</span> phase == <span class="str">"Intermission"</span> <span class="kw">then</span>
+        <span class="cm">-- update lobby timer UI</span>
+    <span class="kw">elseif</span> phase == <span class="str">"Round"</span> <span class="kw">then</span>
+        <span class="cm">-- update round timer UI</span>
+    <span class="kw">elseif</span> phase == <span class="str">"RoundEnded"</span> <span class="kw">then</span>
+        <span class="cm">-- show end screen, play sound, etc.</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Triggering an ability from your own UI</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">AbilityClient handles keyboard input by default. If you want to trigger an ability from a GUI button instead, fire AbilityEvent directly from your own LocalScript.</div>
+      <div class="code-block"><span class="kw">local</span> AbilityEvent = game.ReplicatedStorage.Remotes.AbilityEvent
+
+<span class="cm">-- fire from a button click or any client-side trigger</span>
+myButton.MouseButton1Click:<span class="fn">Connect</span>(<span class="kw">function</span>()
+    AbilityEvent:<span class="fn">FireServer</span>(<span class="str">"Dash"</span>, {})
+<span class="kw">end</span>)
+
+<span class="cm">-- listen for the result fired back from the server</span>
+AbilityEvent.OnClientEvent:<span class="fn">Connect</span>(<span class="kw">function</span>(success, abilityName)
+    <span class="kw">if</span> success <span class="kw">then</span>
+        <span class="cm">-- play animation, update cooldown UI, etc.</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Running code at the start and end of each phase</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">The cleanest way to hook into phase transitions without editing RoundManager is to poll GameState from a separate script, or extend RoundManager's methods directly to call your own functions at the right moment.</div>
+      <div class="code-block"><span class="cm">-- in RoundManager, add your hooks at the top of each method</span>
+
+<span class="kw">function</span> RoundManager:<span class="fn">StartRound</span>()
+    GameState:<span class="fn">SetStatus</span>(<span class="str">"Round"</span>)
+
+    <span class="cm">-- spawn enemies, reset map, distribute weapons, etc.</span>
+    <span class="fn">onRoundStart</span>()
+
+    <span class="kw">for</span> i = GameState:<span class="fn">GetRoundTime</span>(), <span class="num">0</span>, -<span class="num">1</span> <span class="kw">do</span>
+        RoundEvent:<span class="fn">FireAllClients</span>(<span class="str">"Round"</span>, i)
+        task.<span class="fn">wait</span>(<span class="num">1</span>)
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">function</span> RoundManager:<span class="fn">EndRound</span>()
+    GameState:<span class="fn">SetStatus</span>(<span class="str">"Ending"</span>)
+
+    <span class="cm">-- tally scores, announce winner, clean up map, etc.</span>
+    <span class="fn">onRoundEnd</span>()
+
+    RoundEvent:<span class="fn">FireAllClients</span>(<span class="str">"RoundEnded"</span>)
+    task.<span class="fn">wait</span>(<span class="num">5</span>)
+<span class="kw">end</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Changing the minimum player count</div>
+      <div class="card-desc" style="margin-bottom:0.75rem;">The main loop in RoundManager checks how many players are connected before starting a round. Find this block and adjust the threshold to match your game's requirements.</div>
+      <div class="code-block"><span class="cm">-- default: starts with 1 or more players</span>
+<span class="kw">if</span> #players >= <span class="num">1</span> <span class="kw">then</span>
+
+<span class="cm">-- change to require at least 4 players</span>
+<span class="kw">if</span> #players >= <span class="num">4</span> <span class="kw">then</span></div>
+    </div>
+
   </div>
 
   <div class="section">
@@ -235,6 +424,10 @@ Ability.Cooldown = <span class="num">5</span>
       </div>
       <div class="tip-row">
         <div class="tip-icon">▸</div>
+        <div class="tip-text">Use <code>GameState:GetStatus()</code> inside your own ability logic to prevent abilities firing outside of a round</div>
+      </div>
+      <div class="tip-row warn-text">
+        <div class="tip-icon">▸</div>
         <div class="tip-text warn-text">Disable <code>debug mode</code> on both server and client before going live</div>
       </div>
     </div>
@@ -250,6 +443,10 @@ Ability.Cooldown = <span class="num">5</span>
       <div class="step-row">
         <div class="step-num" style="color:var(--accent2)">?</div>
         <div class="step-text"><strong style="color:var(--text)">Cooldown not working</strong> - confirm <code>Cooldown</code> is set inside the ability module</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num" style="color:var(--accent2)">?</div>
+        <div class="step-text"><strong style="color:var(--text)">Round never starts</strong> - check the minimum player count threshold in the main loop of RoundManager</div>
       </div>
       <div class="step-row">
         <div class="step-num" style="color:var(--accent2)">?</div>
