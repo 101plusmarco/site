@@ -1,316 +1,1222 @@
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#000;--surface:#080808;--border:#1a1a1a;
-  --accent:#7f77dd;--accent2:#5dcaa5;
-  --text:#e2e2f0;--muted:#666688;--dim:#2a2a3a;
-}
-body{font-family:'JetBrains Mono',monospace;background:#000;color:var(--text);min-height:100vh;overflow-x:hidden;}
-.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
-header{display:flex;align-items:flex-start;justify-content:space-between;padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3rem;}
-.tag-label{font-size:11px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
-.name{font-family:'Syne',sans-serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;}
-.name span{color:var(--accent);}
-.role{font-size:13px;color:var(--muted);margin-top:0.8rem;line-height:1.8;}
-.status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--accent2);margin-top:1.4rem;}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;animation:pulse 2s ease infinite;}
-.header-right{text-align:right;font-size:11px;color:var(--muted);line-height:2;flex-shrink:0;}
-.section{margin-bottom:3.5rem;}
-.sec-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
-.sec-label span{color:var(--accent);margin-right:4px;}
-.about-text{font-size:13px;line-height:1.9;color:var(--text);max-width:600px;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color 0.2s,transform 0.2s;position:relative;overflow:hidden;}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.2s;}
-.card:hover{border-color:var(--dim);transform:translateX(4px);}.card:hover::before{opacity:1;}
-.card-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:0.5rem;}
-.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);}
-.card-meta{font-size:11px;color:var(--accent);border:1px solid var(--dim);border-radius:3px;padding:2px 8px;}
-.card-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:0.8rem;}
-.tags{display:flex;flex-wrap:wrap;gap:6px;}
-.tag-pill{font-size:10px;color:var(--accent2);border:1px solid rgba(93,202,165,0.2);border-radius:3px;padding:2px 8px;letter-spacing:0.05em;}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
-.skill-item{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0.75rem 1rem;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;transition:border-color 0.2s,color 0.2s;}
-.skill-item:hover{border-color:var(--dim);color:var(--text);}
-.skill-icon{color:var(--accent);}
-.contact-item{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--dim);border-radius:4px;padding:0.7rem 1.2rem;font-size:12px;color:var(--muted);}
-.ci-label{color:var(--accent);margin-right:4px;}
-.social-item{display:flex;align-items:center;gap:10px;padding:0.8rem 0;border-bottom:1px solid var(--border);}
-.social-platform{color:var(--muted);width:90px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;}
-.social-link{color:var(--accent);text-decoration:none;font-size:12px;}
-.social-status{color:var(--muted);font-size:11px;margin-left:auto;font-style:italic;}
-.cat-wrap{position:fixed;bottom:20px;right:20px;z-index:10;width:24px;height:24px;background:url('cat-img.png') center/contain no-repeat;animation:floatCat 3s ease-in-out infinite;cursor:default;user-select:none;filter:drop-shadow(0 0 8px rgba(127,119,221,0.4));}
-footer{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);}
-.cursor{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;vertical-align:text-bottom;animation:blink 0.8s step-end infinite;}
-.hidden{display:none;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
-@keyframes floatCat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-@keyframes popIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-</style>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>fynzel :3</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fynzel :3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,400&family=Syne:wght@400;600;700;800&family=VT323&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES - BRUTALIST PALETTE
+   ============================================================ */
+:root {
+  --concrete: #d4d0c8;
+  --concrete-dark: #b8b4ac;
+  --concrete-light: #e8e4dc;
+  --shadow: #88847c;
+  --ink: #111111;
+  --ink-soft: #2a2a2a;
+  --swiss-red: #e30613;
+  --swiss-red-dark: #b0000f;
+  --neon-green: #33ff33;
+  --neon-green-dark: #22cc22;
+  --neon-yellow: #ffff33;
+  --neon-cyan: #33ffff;
+  --neon-pink: #ff33cc;
+  --link-blue: #0000ee;
+  --link-purple: #551a8b;
+  --white: #fafafa;
+  --black: #0a0a0a;
+  --border-thick: 3px solid var(--ink);
+  --border-thin: 1px solid var(--ink);
+  --border-inset: 2px solid;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background-color: var(--concrete);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  image-rendering: pixelated;
+  overflow-x: hidden;
+}
+
+/* Starfield tiled background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 23% 8%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 37% 22%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 45% 5%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 52% 18%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 68% 12%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 75% 25%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 88% 8%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 5% 30%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 15% 42%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 30% 35%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 48% 40%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 62% 32%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 78% 38%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 92% 35%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 8% 55%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 25% 50%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 42% 58%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 55% 48%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 70% 55%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 85% 52%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 12% 68%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 33% 72%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 50% 65%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 66% 70%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 80% 62%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 95% 68%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 18% 82%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 38% 85%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 58% 78%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 73% 88%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 88% 82%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 22% 92%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 45% 95%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 65% 92%, var(--ink) 100%, transparent),
+    radial-gradient(1px 1px at 82% 95%, var(--ink) 100%, transparent);
+  background-size: 100% 100%;
+  animation: starTwinkle 4s steps(1) infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.18; }
+}
+
+/* Concrete texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.06;
+  background: repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+::selection {
+  background: var(--swiss-red);
+  color: var(--white);
+}
+
+/* ============================================================
+   SCROLLBAR - CHUNKY BRUTALIST
+   ============================================================ */
+::-webkit-scrollbar { width: 14px; }
+::-webkit-scrollbar-track { background: var(--concrete-dark); border-left: 1px solid var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 2px solid var(--concrete-dark); }
+::-webkit-scrollbar-thumb:hover { background: var(--swiss-red); }
+
+/* ============================================================
+   WEB RING - TOP NAVIGATION BAR
+   ============================================================ */
+.web-ring {
+  background: var(--ink);
+  color: var(--neon-green);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 14px;
+  text-align: center;
+  padding: 6px 0;
+  letter-spacing: 0.15em;
+  border-bottom: 2px solid var(--swiss-red);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.web-ring a {
+  color: var(--neon-yellow);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.web-ring a:hover {
+  color: var(--neon-pink);
+  animation: blink 0.6s step-end infinite;
+}
+
+.web-ring .ring-sep {
+  color: var(--swiss-red);
+  font-weight: bold;
+}
+
+.web-ring .ring-current {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================================
+   MAIN GRID - SWISS 2-COLUMN LAYOUT
+   ============================================================ */
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
+  min-height: 100vh;
+  border-left: var(--border-thick);
+  border-right: var(--border-thick);
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--concrete);
+  box-shadow: 8px 0 0 var(--shadow), -8px 0 0 var(--shadow);
+  overflow: hidden;
+}
+
+/* ============================================================
+   LEFT COLUMN - NAVIGATION
+   ============================================================ */
+.col-left {
+  border-right: var(--border-thick);
+  background: var(--concrete-dark);
+  padding: 0;
+}
+
+.nav-box {
+  border-bottom: var(--border-thick);
+}
+
+.nav-box-header {
+  background: var(--ink);
+  color: var(--neon-green);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 13px;
+  padding: 6px 10px;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.nav-box-body {
+  padding: 0;
+}
+
+.nav-box-body a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--ink);
+  transition: background 0.1s, color 0.1s;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  position: relative;
+}
+
+.nav-box-body a::before {
+  content: '■ ';
+  color: var(--swiss-red);
+}
+
+.nav-box-body a:hover {
+  background: var(--ink);
+  color: var(--neon-green);
+}
+
+.nav-box-body a:hover::before {
+  content: '▶ ';
+  color: var(--neon-green);
+}
+
+.nav-box-body a:last-child {
+  border-bottom: none;
+}
+
+.nav-box-time {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-family: 'VT323', 'Courier New', monospace;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.nav-box-time .time-label {
+  color: var(--ink);
+  font-weight: bold;
+}
+
+.nav-box-time .time-value {
+  color: var(--neon-green);
+}
+
+/* ============================================================
+   CENTER COLUMN - MAIN CONTENT
+   ============================================================ */
+.col-center {
+  padding: 0;
+  border-right: var(--border-thick);
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-block {
+  border-bottom: var(--border-thick);
+  padding: 2rem 2rem;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-block::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-bottom: 60px solid var(--swiss-red);
+  opacity: 0.7;
+}
+
+.hero-label {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--swiss-red);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  animation: blink 2s step-end infinite;
+}
+
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.2em;
+}
+
+.hero-name .line2 {
+  display: block;
+  margin-left: 0.8em;
+  color: var(--swiss-red);
+  -webkit-text-stroke: 1px var(--ink);
+}
+
+.hero-sub {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+  padding: 0.6rem 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  display: inline-block;
+}
+
+.hero-status {
+  margin-top: 1.2rem;
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--neon-green-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-status .blink-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--neon-green);
+  border: 2px solid var(--ink);
+  animation: blink 0.7s step-end infinite;
+}
+
+/* ============================================================
+   CONTENT SECTIONS
+   ============================================================ */
+.content-section {
+  border-bottom: var(--border-thick);
+  padding: 1.4rem 1.5rem;
+  background: var(--concrete-light);
+}
+
+.content-section.alt-bg {
+  background: var(--white);
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: var(--border-thin);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title .title-num {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 18px;
+  color: var(--swiss-red);
+  background: var(--ink);
+  padding: 2px 8px;
+  display: inline-block;
+}
+
+.section-title .title-num span {
+  color: var(--neon-green);
+}
+
+/* ============================================================
+   DOSSIER / ABOUT
+   ============================================================ */
+.dossier-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.dossier-table td {
+  border: var(--border-thin);
+  padding: 10px 14px;
+  vertical-align: top;
+}
+
+.dossier-table .d-label {
+  background: var(--ink);
+  color: var(--neon-green);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  width: 90px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.dossier-table .d-value {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.dossier-table .d-value em {
+  font-style: normal;
+  font-weight: 700;
+  background: var(--neon-yellow);
+  padding: 1px 4px;
+}
+
+/* ============================================================
+   PROJECTS - BRUTALIST TABLE
+   ============================================================ */
+.case-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  table-layout: auto;
+  word-break: break-word;
+}
+
+.case-table th {
+  background: var(--ink);
+  color: var(--neon-green);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 12px;
+  padding: 8px 12px;
+  text-align: left;
+  letter-spacing: 0.08em;
+  border: 2px solid var(--ink);
+  white-space: nowrap;
+}
+
+.case-table td {
+  border: 2px solid var(--ink);
+  padding: 10px 12px;
+  vertical-align: top;
+  font-size: 10.5px;
+  line-height: 1.7;
+  background: var(--white);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.case-table tr:hover td {
+  background: var(--neon-yellow);
+}
+
+.case-table .case-ref {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--swiss-red);
+  white-space: nowrap;
+  width: 70px;
+}
+
+.case-table .case-title {
+  font-weight: 700;
+  width: 30%;
+}
+
+.case-table .case-new {
+  display: inline-block;
+  background: var(--swiss-red);
+  color: var(--white);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 9px;
+  padding: 1px 6px;
+  animation: blink 0.9s step-end infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.case-table .case-link {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--link-blue);
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.case-table .case-link:hover {
+  color: var(--swiss-red);
+}
+
+.case-table .case-link:visited {
+  color: var(--link-purple);
+}
+
+.case-tag {
+  display: inline-block;
+  border: var(--border-thin);
+  padding: 2px 7px;
+  font-size: 9px;
+  margin: 2px;
+  background: var(--concrete);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.case-tag:hover {
+  background: var(--ink);
+  color: var(--neon-green);
+  cursor: default;
+}
+
+/* ============================================================
+   EXPERIENCE - TIMELINE TABLE
+   ============================================================ */
+.xp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.xp-table td {
+  border: 2px solid var(--ink);
+  padding: 12px 14px;
+  vertical-align: top;
+}
+
+.xp-table .xp-year {
+  background: var(--ink);
+  color: var(--neon-green);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 15px;
+  width: 110px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.xp-table .xp-year.current {
+  background: var(--swiss-red);
+  color: var(--white);
+}
+
+.xp-table .xp-year .xp-dur {
+  display: block;
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  letter-spacing: 0.1em;
+}
+
+.xp-table .xp-details h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.xp-table .xp-details .nda-note {
+  font-size: 9px;
+  color: var(--swiss-red);
+  border-left: 3px solid var(--swiss-red);
+  padding-left: 10px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ============================================================
+   SKILLS - INVENTORY GRID
+   ============================================================ */
+.skills-grid-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0;
+  border: var(--border-thick);
+}
+
+.skill-cell {
+  border: var(--border-thin);
+  padding: 0.6rem 0.8rem;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  text-align: center;
+  background: var(--white);
+  transition: background 0.1s, color 0.1s;
+  cursor: default;
+}
+
+.skill-cell:hover {
+  background: var(--ink);
+  color: var(--neon-green);
+  font-weight: 700;
+}
+
+.skill-cell::before {
+  content: '[ ';
+  color: var(--swiss-red);
+}
+
+.skill-cell::after {
+  content: ' ]';
+  color: var(--swiss-red);
+}
+
+.skill-cell:hover::before,
+.skill-cell:hover::after {
+  color: var(--neon-green);
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-block {
+  border: var(--border-thick);
+  background: var(--white);
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-row {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.contact-label {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 13px;
+  min-width: 70px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.contact-value {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  border-bottom: 2px solid var(--ink);
+  padding: 4px 0;
+  color: var(--ink);
+  flex: 1;
+  min-width: 120px;
+}
+
+.contact-value.discord {
+  color: var(--swiss-red);
+  font-weight: 700;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer-bar {
+  background: var(--ink);
+  color: var(--concrete-light);
+  text-align: center;
+  padding: 10px 1rem;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  border-top: 3px solid var(--swiss-red);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ============================================================
+   CAT EASTER EGG
+   ============================================================ */
+.cat-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 300;
+  cursor: pointer;
+  user-select: none;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  animation: floatCat 3s ease-in-out infinite;
+}
+
+.cat-container:hover {
+  animation: none;
+  transform: scale(1.3);
+}
+
+.cat-container:active {
+  transform: scale(0.9) rotate(-10deg);
+}
+
+.cat-speech {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: var(--ink);
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+  padding: 4px 10px;
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  margin-bottom: 6px;
+}
+
+.cat-container:hover .cat-speech {
+  opacity: 1;
+}
+
+@keyframes floatCat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-5px) rotate(1deg); }
+  60% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+/* ============================================================
+   RESPONSIVE - TABLET
+   ============================================================ */
+@media (max-width: 900px) {
+  .page-grid {
+    grid-template-columns: 130px minmax(0, 1fr);
+  }
+
+  .case-table th:nth-child(1),
+  .case-table td:nth-child(1) {
+    display: none;
+  }
+
+  .case-table th,
+  .case-table td {
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .skills-grid-box {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+/* ============================================================
+   RESPONSIVE - MOBILE
+   ============================================================ */
+@media (max-width: 680px) {
+  .page-grid {
+    grid-template-columns: 1fr;
+    border-left: var(--border-thick);
+    border-right: var(--border-thick);
+    box-shadow: none;
+  }
+
+  .col-left {
+    display: none;
+  }
+
+  .web-ring {
+    font-size: 11px;
+    gap: 0.8rem;
+    padding: 4px 0;
+  }
+
+  .hero-block {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-name {
+    font-size: clamp(1.4rem, 7vw, 2rem);
+  }
+
+  .hero-block::after {
+    border-left-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  .content-section {
+    padding: 1.2rem 1rem;
+  }
+
+  .case-table {
+    font-size: 9px;
+  }
+
+  .case-table th,
+  .case-table td {
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .case-table .case-ref {
+    display: none;
+  }
+
+  .case-table th:nth-child(1),
+  .case-table td:nth-child(1) {
+    display: none;
+  }
+
+  .skills-grid-box {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .skill-cell {
+    font-size: 9px;
+    padding: 0.5rem;
+  }
+
+  .xp-table .xp-year {
+  font-size: 16px;
+    width: 80px;
+  }
+
+  .dossier-table .d-label {
+    font-size: 10px;
+    width: 60px;
+    padding: 6px 8px;
+  }
+
+  .contact-row {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+    position: fixed;
+    top: 40px;
+    left: 10px;
+    z-index: 300;
+    background: var(--ink);
+    color: var(--neon-green);
+    border: 2px solid var(--neon-green);
+    padding: 6px 10px;
+    font-family: 'VT323', 'Courier New', monospace;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    z-index: 299;
+    background: var(--concrete-dark);
+    border-right: var(--border-thick);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+    padding-top: 50px;
+  }
+
+  .mobile-nav.open {
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 681px) {
+  .mobile-nav-toggle,
+  .mobile-nav {
+    display: none;
+  }
+}
+</style>
 </head>
+<body>
 
-<div class="wrap">
-  <header>
-    <div>
-      <div class="tag-label hidden" id="e-tag">// portfolio.v2</div>
-      <div class="name hidden" id="e-name">Maximilian<br><span>H.</span></div>
-      <div class="role hidden" id="e-role"></div>
-      <div class="status hidden" id="e-status"><div class="dot"></div><span id="e-status-text"></span></div>
-    </div>
-    <div class="header-right hidden" id="e-hright">
-      <div style="color:var(--accent2)">UBS Bank Switzerland</div>
-      <div>Accountant</div>
-      <div style="margin-top:8px;color:var(--accent)">SAP SE</div>
-      <div>Software Engineer (2-3 yr)</div>
-    </div>
-  </header>
-
-  <div class="section hidden" id="e-about-sec">
-    <div class="sec-label"><span>//</span>about</div>
-    <p class="about-text" id="e-about"></p>
-  </div>
-
-  <div class="section hidden" id="e-proj-sec">
-    <div class="sec-label"><span>//</span>projects</div>
-
-    <div class="card" id="e-card1" style="opacity:0">
-      <div class="card-head">
-        <div class="card-title">Modular Round &amp; Ability System</div>
-        <div class="card-meta">for sale</div>
-      </div>
-      <div class="card-desc" id="e-proj-desc"></div>
-      <div class="tags hidden" id="e-proj-tags">
-        <span class="tag-pill">Modular Architecture</span>
-        <span class="tag-pill">Client-Server</span>
-        <span class="tag-pill">RemoteEvents</span>
-        <span class="tag-pill">State Management</span>
-        <span class="tag-pill">Performance</span>
-        <span class="tag-pill">Roblox Lua</span>
-      </div>
-      <div class="hidden" id="e-proj-link" style="margin-top:1rem">
-        <a href="https://fynzel.eu/other/round_system_docs" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View documentation</a>
-      </div>
-    </div>
-
-    <div class="card" id="e-card-p2" style="opacity:0">
-      <div class="card-head">
-        <div class="card-title">Modular RNG Case System</div>
-        <div class="card-meta">for sale</div>
-      </div>
-      <div class="card-desc" id="e-proj2-desc"></div>
-      <div class="tags hidden" id="e-proj2-tags">
-        <span class="tag-pill">Weighted RNG</span>
-        <span class="tag-pill">Pity System</span>
-        <span class="tag-pill">DataStore</span>
-        <span class="tag-pill">Modular Architecture</span>
-        <span class="tag-pill">Roblox Lua</span>
-      </div>
-      <div class="hidden" id="e-proj2-link" style="margin-top:1rem">
-        <a href="https://fynzel.eu/other/rng_system_docs" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View documentation</a>
-      </div>
-    </div>
-
-    <div class="card" id="e-card-p3" style="opacity:0">
-      <div class="card-head">
-        <div class="card-title">Stock Market Simulation</div>
-        <div class="card-meta">showcase</div>
-      </div>
-      <div class="card-desc" id="e-proj3-desc"></div>
-      <div class="tags hidden" id="e-proj3-tags">
-        <span class="tag-pill">Accurate Simulation</span>
-        <span class="tag-pill">JavaScript</span>
-        <span class="tag-pill">React</span>
-        <span class="tag-pill">PostgreSQL</span>
-      </div>
-      <div class="hidden" id="e-proj3-link" style="margin-top:1rem">
-        <a href="https://firedam.eu.org" target="_blank" style="font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--dim);padding-bottom:1px;">View project</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="section hidden" id="e-exp-sec">
-    <div class="sec-label"><span>//</span>experience</div>
-    <div class="card hidden" id="e-card2">
-      <div class="card-head"><div class="card-title">SAP SE</div><div class="card-meta">2-3 yrs</div></div>
-      <div class="card-desc" id="e-sap-desc"></div>
-      <div class="tags hidden" id="e-sap-tags"><span class="tag-pill">Modular Systems</span><span class="tag-pill">GitHub</span><span class="tag-pill">Debugging</span></div>
-      <div style="margin-top:0.75rem;font-size:11px;color:var(--dim);font-style:italic" class="hidden" id="e-nda">Past work under NDA - collaborative GitHub history</div>
-    </div>
-    <div class="card hidden" id="e-card3">
-      <div class="card-head"><div class="card-title">UBS Bank Switzerland</div><div class="card-meta">current</div></div>
-      <div class="card-desc" id="e-ubs-desc"></div>
-      <div class="tags hidden" id="e-ubs-tags"><span class="tag-pill">Bookkeeping</span><span class="tag-pill">Auditing</span><span class="tag-pill">Tax</span></div>
-    </div>
-  </div>
-
-  <div class="section hidden" id="e-skills-sec">
-    <div class="sec-label"><span>//</span>skills</div>
-    <div class="skills-grid" id="e-skills-grid"></div>
-  </div>
-
-  <div class="section hidden" id="e-social-sec">
-    <div class="sec-label"><span>//</span>socials</div>
-    <div class="card" style="padding:0.5rem 1.5rem">
-      <div class="social-item">
-        <div class="social-platform">Bluesky</div>
-        <a href="https://www.youtube.com/watch?v=UVAmlSGH-MM" target="_blank" class="social-link">Temporarily Unavailable</a>
-        <div class="social-status">coming soon</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section hidden" id="e-contact-sec">
-    <div class="sec-label"><span>//</span>contact</div>
-    <div class="contact-item"><span class="ci-label">discord</span>colinizer101</div>
-  </div>
-
-  <footer class="hidden" id="e-footer">
-    <div>maximilian h. - switzerland</div>
-    <div style="color:var(--accent)">software dev &amp; accountant</div>
-  </footer>
+<!-- ============================================================
+     WEB RING - TOP BAR
+     ============================================================ -->
+<div class="web-ring">
+  <a href="#" title="Previous">← PREV</a>
+  <span class="ring-sep">|</span>
+  <span class="ring-current">MAXIMILIAN H.</span>
+  <span class="ring-sep">|</span>
+  <a href="#" title="Index">▲ INDEX</a>
+  <span class="ring-sep">|</span>
+  <a href="#" title="Next">NEXT →</a>
 </div>
 
-<div class="cat-wrap hidden" id="e-cat">
+<!-- Mobile nav -->
+<button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menu">☰ NAV</button>
+<div class="mobile-nav" id="mobileNav">
+  <div class="nav-box">
+    <div class="nav-box-header">NAVIGATION</div>
+    <div class="nav-box-body">
+      <a href="#hero">HOME</a>
+      <a href="#about">ABOUT</a>
+      <a href="#projects">PROJECTS <span class="nav-new-badge">NEW</span></a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#connect">CONTACT</a>
+    </div>
+  </div>
+  <div class="nav-box-time" id="navTimeMobile"></div>
+</div>
+
+<!-- ============================================================
+     PAGE GRID
+     ============================================================ -->
+<div class="page-grid">
+
+  <!-- ========== LEFT COLUMN ========== -->
+  <aside class="col-left">
+    <div class="nav-box">
+      <div class="nav-box-header">NAVIGATION</div>
+      <div class="nav-box-body">
+        <a href="#hero">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#projects">PROJECTS <span class="nav-new-badge">NEW</span></a>
+        <a href="#experience">EXPERIENCE</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#connect">CONTACT</a>
+      </div>
+    </div>
+    <div class="nav-box-time" id="navTimeDesktop"></div>
+  </aside>
+
+  <!-- ========== CENTER COLUMN ========== -->
+  <main class="col-center">
+
+    <!-- HERO -->
+    <section class="hero-block" id="hero">
+      <div class="hero-label">■ MAIN.HTML</div>
+      <h1 class="hero-name">
+        <span>Maximilian</span>
+        <span class="line2">H.</span>
+      </h1>
+      <div class="hero-sub">SOFTWARE DEVELOPER &amp; ACCOUNTANT · SWITZERLAND</div>
+      <div class="hero-status">
+        <span class="blink-dot"></span> AVAILABLE FOR WORK
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="content-section" id="projects">
+      <div class="section-title">
+        <span class="title-num"><span>#</span>003</span> PROJECTS
+      </div>
+      <table class="case-table">
+        <thead>
+          <tr>
+            <th>REF</th>
+            <th>TITLE</th>
+            <th>STATUS</th>
+            <th>DESCRIPTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="case-ref">PRJ-001</td>
+            <td class="case-title">Modular Round &amp; Ability System</td>
+            <td>FOR SALE</td>
+            <td>
+              A scalable round-based system with an integrated ability framework, built for clean extensibility and structured client-server communication.
+              <div style="margin-top:6px;">
+                <span class="case-tag">Modular Architecture</span>
+                <span class="case-tag">Client-Server</span>
+                <span class="case-tag">RemoteEvents</span>
+                <span class="case-tag">State Mgmt</span>
+                <span class="case-tag">Performance</span>
+                <span class="case-tag">Roblox Lua</span>
+              </div>
+              <a href="https://fynzel.eu/other/round_system_docs" target="_blank" class="case-link">→ VIEW DOCUMENTATION</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="case-ref">PRJ-002</td>
+            <td class="case-title">Modular RNG Case System</td>
+            <td>FOR SALE</td>
+            <td>
+              A fully modular RNG and case-opening framework for Roblox, featuring weighted tier rolling, a pity system, inventory management, global events, and secure DataStore saving.
+              <div style="margin-top:6px;">
+                <span class="case-tag">Weighted RNG</span>
+                <span class="case-tag">Pity System</span>
+                <span class="case-tag">DataStore</span>
+                <span class="case-tag">Modular</span>
+                <span class="case-tag">Roblox Lua</span>
+              </div>
+              <a href="https://fynzel.eu/other/rng_system_docs" target="_blank" class="case-link">→ VIEW DOCUMENTATION</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="case-ref">PRJ-003</td>
+            <td class="case-title"><span class="case-new">NEW!</span> Stock Market Simulation</td>
+            <td>SHOWCASE</td>
+            <td>
+              A realistic stock market simulation driven by real-world volatility and trend data. Features candlestick charts, heatmap, portfolio management, buy/sell system, dividends, shorting, and a live leaderboard - built with React and PostgreSQL.
+              <div style="margin-top:6px;">
+                <span class="case-tag">Simulation</span>
+                <span class="case-tag">JavaScript</span>
+                <span class="case-tag">React</span>
+                <span class="case-tag">PostgreSQL</span>
+              </div>
+              <a href="https://firedam.eu.org" target="_blank" class="case-link">→ VIEW PROJECT</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="content-section alt-bg" id="experience">
+      <div class="section-title">
+        <span class="title-num"><span>#</span>004</span> LEDGER ENTRIES
+      </div>
+      <table class="xp-table">
+        <tr>
+          <td class="xp-year current">
+            PRESENT
+            <span class="xp-dur">CURRENT</span>
+          </td>
+          <td class="xp-details">
+            <h4>UBS Bank Switzerland</h4>
+            <p>Accountant with professional experience in bookkeeping, auditing, and tax.</p>
+            <span class="case-tag">Bookkeeping</span>
+            <span class="case-tag">Auditing</span>
+            <span class="case-tag">Tax</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="xp-year">
+            2022–2025
+            <span class="xp-dur">2–3 YRS</span>
+          </td>
+          <td class="xp-details">
+            <h4>SAP SE</h4>
+            <p>Built and maintained modular systems. Focused on performance, debugging, and clean structure in collaborative environments.</p>
+            <span class="case-tag">Modular Systems</span>
+            <span class="case-tag">GitHub</span>
+            <span class="case-tag">Debugging</span>
+            <p class="nda-note">⚠ Past work under NDA - collaborative GitHub history available</p>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="content-section" id="skills">
+      <div class="section-title">
+        <span class="title-num"><span>#</span>005</span> INVENTORY
+      </div>
+      <div class="skills-grid-box" id="skillsGrid"></div>
+    </section>
+
+    <!-- CONNECT -->
+    <section class="content-section alt-bg" id="connect">
+      <div class="section-title">
+        <span class="title-num"><span>#</span>006</span> CHANNELS
+      </div>
+      <div class="contact-block">
+        <div class="contact-row">
+          <span class="contact-label">NAME:</span>
+          <span class="contact-value">Maximilian H.</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">BLUESKY:</span>
+          <span class="contact-value"><a href="https://www.youtube.com/watch?v=UVAmlSGH-MM" target="_blank" style="color:var(--link-blue);">Temporarily Unavailable</a> <span style="font-size:9px;color:var(--ink-soft);font-style:italic;">(coming soon)</span></span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">DISCORD:</span>
+          <span class="contact-value discord">colinizer101</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-bar">
+      MAXIMILIAN H. - SWITZERLAND &nbsp;|&nbsp; SOFTWARE DEVELOPER &amp; ACCOUNTANT &nbsp;|&nbsp; <span id="footerDate"></span>
+    </footer>
+
+  </main>
+
+</div><!-- /page-grid -->
+
+<!-- Cat easter egg -->
+<div class="cat-container" id="catContainer" title="Found me!">
+  <span class="cat-speech" id="catSpeech">meow?</span>
+  <span>=^◕⩊◕^=</span>
 </div>
 
 <script>
-const SPEED = 0;
-const VARIANCE = 1;
+/* ============================================================
+   SKILLS GRID
+   ============================================================ */
+const skills = [
+  'Client-Server Architecture', 'UI Systems', 'Modular Design',
+  'Debugging & Optimization', 'Bookkeeping', 'Auditing & Tax',
+  'Full-Stack Web Dev', 'SQL Databases',
+  'React', 'JavaScript', 'Java', 'C++', 'Lua'
+];
 
-function show(id){ const el=document.getElementById(id); el.classList.remove('hidden'); return el; }
-function pop(id){ const el=show(id); el.style.opacity='0'; el.style.animation='none'; requestAnimationFrame(()=>{ el.style.animation='popIn 0.25s ease forwards'; }); return el; }
+const grid = document.getElementById('skillsGrid');
+skills.forEach(skill => {
+  const cell = document.createElement('div');
+  cell.className = 'skill-cell';
+  cell.textContent = skill;
+  grid.appendChild(cell);
+});
 
-function type(el, text, speed, done){
-  let i=0;
-  const cur=document.createElement('span');
-  cur.className='cursor';
-  el.appendChild(cur);
-  function tick(){
-    if(i<text.length){
-      el.insertBefore(document.createTextNode(text[i++]),cur);
-      setTimeout(tick, speed + Math.random()*speed*VARIANCE);
-    } else {
-      cur.remove();
-      if(done) setTimeout(done,80);
-    }
-  }
-  tick();
+/* ============================================================
+   FOOTER DATE + CEST CLOCK
+   ============================================================ */
+const footerDate = document.getElementById('footerDate');
+const nowDate = new Date();
+footerDate.textContent =
+  `LAST UPDATED: ${String(nowDate.getMonth()+1).padStart(2,'0')}/${String(nowDate.getDate()).padStart(2,'0')}/${String(nowDate.getFullYear().toString().slice(2))}`;
+
+function updateNavClock() {
+  const d = new Date();
+  const h = String(d.getHours()).padStart(2, '0');
+  const m = String(d.getMinutes()).padStart(2, '0');
+  const s = String(d.getSeconds()).padStart(2, '0');
+  const timeStr = `<span class="time-label">CEST</span> <span class="time-value">${h}:${m}:${s}</span>`;
+  const dEl = document.getElementById('navTimeDesktop');
+  const mEl = document.getElementById('navTimeMobile');
+  if (dEl) dEl.innerHTML = timeStr;
+  if (mEl) mEl.innerHTML = timeStr;
 }
+updateNavClock();
+setInterval(updateNavClock, 1000);
 
-function wait(ms, fn){ setTimeout(fn, ms); }
+/* ============================================================
+   MOBILE NAVIGATION
+   ============================================================ */
+const mobileToggle = document.getElementById('mobileNavToggle');
+const mobileNav = document.getElementById('mobileNav');
 
-function runSequence(){
-  wait(200, ()=>{
-    pop('e-tag');
-    wait(350, ()=>{
-      pop('e-name');
-      wait(350, ()=>{
-        show('e-role');
-        type(document.getElementById('e-role'), 'Software Developer & Accountant · Switzerland', SPEED, ()=>{
-          show('e-status');
-          type(document.getElementById('e-status-text'), 'Available for work', SPEED, ()=>{
-            pop('e-hright');
-            wait(300, ()=>{
-              show('e-about-sec');
-              type(document.getElementById('e-about'), 'Software Developer and Accountant based in Switzerland, with a focus on modular systems, scalable architecture, and clean code - alongside professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
+if (mobileToggle && mobileNav) {
+  mobileToggle.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+  });
 
-                show('e-proj-sec');
-                const c1=document.getElementById('e-card1');
-                c1.style.opacity='1';
-                type(document.getElementById('e-proj-desc'), 'A scalable round-based system with an integrated ability framework, built for clean extensibility and structured client-server communication.', SPEED, ()=>{
-                  pop('e-proj-tags');
-                  wait(150, ()=>{
-                    pop('e-proj-link');
-                    wait(200, ()=>{
-
-                      const c2=document.getElementById('e-card-p2');
-                      c2.style.opacity='1';
-                      type(document.getElementById('e-proj2-desc'), 'A fully modular RNG and case-opening framework for Roblox, featuring weighted tier rolling, a pity system, inventory management, global events, and secure DataStore saving, designed for clean extensibility across any simulator-style game.', SPEED, ()=>{
-                        pop('e-proj2-tags');
-                        wait(150, ()=>{
-                          pop('e-proj2-link');
-                          wait(200, ()=>{
-
-                            const c3=document.getElementById('e-card-p3');
-                            c3.style.opacity='1';
-                            type(document.getElementById('e-proj3-desc'), 'A realistic stock market simulation driven by real-world volatility and trend data. Features candlestick and line charts, a heatmap, portfolio management, and a full buy/sell system where large trades move the market. Includes dividends, shorting, market events, a watchlist, and a live leaderboard, built with React and PostgreSQL.', SPEED, ()=>{
-                              pop('e-proj3-tags');
-                              wait(150, ()=>{
-                                pop('e-proj3-link');
-                                wait(200, ()=>{
-
-                                  show('e-exp-sec');
-                                  pop('e-card2');
-                                  type(document.getElementById('e-sap-desc'), 'Built and maintained modular systems. Focused on performance, debugging, and clean structure in collaborative environments.', SPEED, ()=>{
-                                    pop('e-sap-tags');
-                                    pop('e-nda');
-                                    wait(200, ()=>{
-                                      pop('e-card3');
-                                      type(document.getElementById('e-ubs-desc'), 'Accountant with professional experience in bookkeeping, auditing, and tax.', SPEED, ()=>{
-                                        pop('e-ubs-tags');
-                                        wait(200, ()=>{
-
-                                          show('e-skills-sec');
-                                          const skills=[
-                                            'Client-Server Architecture','UI Systems','Modular Design',
-                                            'Debugging & Optimization','Bookkeeping','Auditing & Tax',
-                                            'Full-Stack Web Development','Database Optimization',
-                                            'React, JavaScript, Java, C++, Lua'
-                                          ];
-                                          const grid=document.getElementById('e-skills-grid');
-                                          skills.forEach((s,i)=>{
-                                            wait(i*80, ()=>{
-                                              const d=document.createElement('div');
-                                              d.className='skill-item';
-                                              d.style.opacity='0';
-                                              d.innerHTML='<span class="skill-icon">▸</span>'+s;
-                                              grid.appendChild(d);
-                                              requestAnimationFrame(()=>{ d.style.animation='popIn 0.2s ease forwards'; });
-                                            });
-                                          });
-                                          wait(skills.length*80+150, ()=>{
-                                            pop('e-social-sec');
-                                            wait(300, ()=>{
-                                              pop('e-contact-sec');
-                                              wait(300, ()=>{
-                                                pop('e-footer');
-                                                show('e-cat');
-                                              });
-                                            });
-                                          });
-
-                                        });
-                                      });
-                                    });
-                                  });
-
-                                });
-                              });
-                            });
-
-                          });
-                        });
-                      });
-
-                    });
-                  });
-                });
-
-              });
-            });
-          });
-        });
-      });
+  // Close on link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
     });
+  });
+
+  // Close on click outside
+  document.addEventListener('click', (e) => {
+    if (!mobileNav.contains(e.target) && e.target !== mobileToggle) {
+      mobileNav.classList.remove('open');
+    }
   });
 }
 
-window.addEventListener('load', runSequence);
+/* ============================================================
+   CAT EASTER EGG
+   ============================================================ */
+const catContainer = document.getElementById('catContainer');
+const catSpeech = document.getElementById('catSpeech');
+
+const catPhrases = [
+  'meow?',
+  'prrr...',
+  'mew!',
+  'this ledger is a mess',
+  'found a bug!',
+  '...debugging...',
+  'nyaa~',
+  '*stares at your code*',
+  'i like boys',
+  'UBS called',
+  'SAP called too',
+  'touch grass?',
+  '/ᐠ > ˕ <マ',
+  'why so serious?',
+  'mrrow?',
+];
+
+let catClickCount = 0;
+
+catContainer.addEventListener('click', () => {
+  catClickCount++;
+  const phrase = catPhrases[catClickCount % catPhrases.length];
+  catSpeech.textContent = phrase;
+
+  catContainer.style.animation = 'none';
+  catContainer.offsetHeight;
+  catContainer.style.animation = 'floatCat 3s ease-in-out infinite';
+
+  if (catClickCount >= 20) {
+    catClickCount = 0;
+    catSpeech.textContent = 'ok you win...';
+  }
+});
+
 </script>
+
+</body>
+</html>
