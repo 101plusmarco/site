@@ -654,14 +654,17 @@ body::after {
   z-index: 300;
   cursor: pointer;
   user-select: none;
-  font-size: 20px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.3s ease;
   animation: floatCat 3s ease-in-out infinite;
 }
 
-.cat-container:hover {
-  animation: none;
-  transform: scale(1.3);
+.cat-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .cat-container:active {
@@ -1047,7 +1050,7 @@ body::after {
 <!-- Cat easter egg -->
 <div class="cat-container" id="catContainer" title="Found me!">
   <span class="cat-speech" id="catSpeech">meow?</span>
-  <span>=^◕⩊◕^=</span>
+  <span><img src="cat-img.png"></span>
 </div>
 
 <script>
