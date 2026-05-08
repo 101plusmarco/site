@@ -8,9 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,400&family=Syne:wght@400;600;700;800&family=VT323&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   CSS CUSTOM PROPERTIES - BRUTALIST PALETTE
-   ============================================================ */
+
 :root {
   --concrete: #d4d0c8;
   --concrete-dark: #b8b4ac;
@@ -34,9 +32,6 @@
   --border-inset: 2px solid;
 }
 
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
@@ -109,7 +104,6 @@ body::before {
   50% { opacity: 0.18; }
 }
 
-/* Concrete texture overlay */
 body::after {
   content: '';
   position: fixed;
@@ -120,25 +114,16 @@ body::after {
   background: repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
 }
 
-/* ============================================================
-   SELECTION
-   ============================================================ */
 ::selection {
   background: var(--swiss-red);
   color: var(--white);
 }
 
-/* ============================================================
-   SCROLLBAR - CHUNKY BRUTALIST
-   ============================================================ */
 ::-webkit-scrollbar { width: 14px; }
 ::-webkit-scrollbar-track { background: var(--concrete-dark); border-left: 1px solid var(--ink); }
 ::-webkit-scrollbar-thumb { background: var(--ink); border: 2px solid var(--concrete-dark); }
 ::-webkit-scrollbar-thumb:hover { background: var(--swiss-red); }
 
-/* ============================================================
-   WEB RING - TOP NAVIGATION BAR
-   ============================================================ */
 .web-ring {
   background: var(--ink);
   color: var(--neon-green);
@@ -184,9 +169,6 @@ body::after {
   50% { opacity: 0; }
 }
 
-/* ============================================================
-   MAIN GRID - SWISS 2-COLUMN LAYOUT
-   ============================================================ */
 .page-grid {
   display: grid;
   grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
@@ -200,9 +182,6 @@ body::after {
   overflow: hidden;
 }
 
-/* ============================================================
-   LEFT COLUMN - NAVIGATION
-   ============================================================ */
 .col-left {
   border-right: var(--border-thick);
   background: var(--concrete-dark);
@@ -276,9 +255,6 @@ body::after {
   color: var(--neon-green);
 }
 
-/* ============================================================
-   CENTER COLUMN - MAIN CONTENT
-   ============================================================ */
 .col-center {
   padding: 0;
   border-right: var(--border-thick);
@@ -286,9 +262,6 @@ body::after {
   overflow: hidden;
 }
 
-/* ============================================================
-   HERO
-   ============================================================ */
 .hero-block {
   border-bottom: var(--border-thick);
   padding: 2rem 2rem;
@@ -367,9 +340,6 @@ body::after {
   animation: blink 0.7s step-end infinite;
 }
 
-/* ============================================================
-   CONTENT SECTIONS
-   ============================================================ */
 .content-section {
   border-bottom: var(--border-thick);
   padding: 1.4rem 1.5rem;
@@ -407,9 +377,6 @@ body::after {
   color: var(--neon-green);
 }
 
-/* ============================================================
-   DOSSIER / ABOUT
-   ============================================================ */
 .dossier-table {
   width: 100%;
   border-collapse: collapse;
@@ -445,9 +412,6 @@ body::after {
   padding: 1px 4px;
 }
 
-/* ============================================================
-   PROJECTS - BRUTALIST TABLE
-   ============================================================ */
 .case-table {
   width: 100%;
   border-collapse: collapse;
@@ -541,9 +505,6 @@ body::after {
   cursor: default;
 }
 
-/* ============================================================
-   EXPERIENCE - TIMELINE TABLE
-   ============================================================ */
 .xp-table {
   width: 100%;
   border-collapse: collapse;
@@ -636,9 +597,6 @@ body::after {
   color: var(--neon-green);
 }
 
-/* ============================================================
-   CONTACT
-   ============================================================ */
 .contact-block {
   border: var(--border-thick);
   background: var(--white);
@@ -678,9 +636,6 @@ body::after {
   font-weight: 700;
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
 .footer-bar {
   background: var(--ink);
   color: var(--concrete-light);
@@ -692,9 +647,6 @@ body::after {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
-/* ============================================================
-   CAT EASTER EGG
-   ============================================================ */
 .cat-container {
   position: fixed;
   bottom: 20px;
@@ -743,9 +695,6 @@ body::after {
   60% { transform: translateY(-2px) rotate(-1deg); }
 }
 
-/* ============================================================
-   RESPONSIVE - TABLET
-   ============================================================ */
 @media (max-width: 900px) {
   .page-grid {
     grid-template-columns: 130px minmax(0, 1fr);
@@ -894,9 +843,6 @@ body::after {
 </head>
 <body>
 
-<!-- ============================================================
-     WEB RING - TOP BAR
-     ============================================================ -->
 <div class="web-ring">
   <a href="#" title="Previous">← PREV</a>
   <span class="ring-sep">|</span>
@@ -924,12 +870,8 @@ body::after {
   <div class="nav-box-time" id="navTimeMobile"></div>
 </div>
 
-<!-- ============================================================
-     PAGE GRID
-     ============================================================ -->
 <div class="page-grid">
 
-  <!-- ========== LEFT COLUMN ========== -->
   <aside class="col-left">
     <div class="nav-box">
       <div class="nav-box-header">NAVIGATION</div>
@@ -950,7 +892,7 @@ body::after {
 
     <!-- HERO -->
     <section class="hero-block" id="hero">
-      <div class="hero-label">■ MAIN.HTML</div>
+      <div class="hero-label">■ PORTFOLIO.V3</div>
       <h1 class="hero-name">
         <span>Maximilian</span>
         <span class="line2">H.</span>
@@ -1109,9 +1051,7 @@ body::after {
 </div>
 
 <script>
-/* ============================================================
-   SKILLS GRID
-   ============================================================ */
+
 const skills = [
   'Client-Server Architecture', 'UI Systems', 'Modular Design',
   'Debugging & Optimization', 'Bookkeeping', 'Auditing & Tax',
@@ -1127,9 +1067,6 @@ skills.forEach(skill => {
   grid.appendChild(cell);
 });
 
-/* ============================================================
-   FOOTER DATE + CEST CLOCK
-   ============================================================ */
 const footerDate = document.getElementById('footerDate');
 const nowDate = new Date();
 footerDate.textContent =
@@ -1149,9 +1086,6 @@ function updateNavClock() {
 updateNavClock();
 setInterval(updateNavClock, 1000);
 
-/* ============================================================
-   MOBILE NAVIGATION
-   ============================================================ */
 const mobileToggle = document.getElementById('mobileNavToggle');
 const mobileNav = document.getElementById('mobileNav');
 
@@ -1175,9 +1109,6 @@ if (mobileToggle && mobileNav) {
   });
 }
 
-/* ============================================================
-   CAT EASTER EGG
-   ============================================================ */
 const catContainer = document.getElementById('catContainer');
 const catSpeech = document.getElementById('catSpeech');
 
