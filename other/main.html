@@ -1075,19 +1075,36 @@ const nowDate = new Date();
 footerDate.textContent =
   `LAST UPDATED: ${String(nowDate.getMonth()+1).padStart(2,'0')}/${String(nowDate.getDate()).padStart(2,'0')}/${String(nowDate.getFullYear().toString().slice(2))}`;
 
+let cestOffset = 2; // fallback: UTC+2
+
+async function fetchCESTOffset() {
+  try {
+    const res = await fetch('https://worldtimeapi.org/api/timezone/Europe/Zurich');
+    const data = await res.json();
+    cestOffset = (data.raw_offset + data.dst_offset) / 3600;
+  } catch (e) {
+    // fallback to UTC+2
+  }
+}
+
 function updateNavClock() {
-  const d = new Date();
-  const h = String(d.getHours()).padStart(2, '0');
-  const m = String(d.getMinutes()).padStart(2, '0');
-  const s = String(d.getSeconds()).padStart(2, '0');
-  const timeStr = `<span class="time-label">CEST</span> <span class="time-value">${h}:${m}:${s}</span>`;
+  const now = new Date();
+  const cest = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + cestOffset * 3600000);
+  const h = String(cest.getHours()).padStart(2, '0');
+  const m = String(cest.getMinutes()).padStart(2, '0');
+  const s = String(cest.getSeconds()).padStart(2, '0');
+  const label = cestOffset === 1 ? 'CET' : 'CEST';
+  const timeStr = `<span class="time-label">${label}</span> <span class="time-value">${h}:${m}:${s}</span>`;
   const dEl = document.getElementById('navTimeDesktop');
   const mEl = document.getElementById('navTimeMobile');
   if (dEl) dEl.innerHTML = timeStr;
   if (mEl) mEl.innerHTML = timeStr;
 }
-updateNavClock();
-setInterval(updateNavClock, 1000);
+
+fetchCESTOffset().then(() => {
+  updateNavClock();
+  setInterval(updateNavClock, 1000);
+});
 
 const mobileToggle = document.getElementById('mobileNavToggle');
 const mobileNav = document.getElementById('mobileNav');
