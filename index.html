@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fiskal :3</title>
+  <meta name="description" content="fiskal's about: roblox systems, bookkeeping-adjacent tools and websites that don't look like spreadsheets.">
+  <meta name="theme-color" content="#0b0b0e">
+  <!-- flags the page as scriptable so reveal animations only run when JS is on -->
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">skip to the good bit</a>
+
+  <!-- ===== loading screen: a delayed departures board with a tea progress bar ===== -->
+  <div class="loader" id="loader" aria-live="polite">
+    <div class="board">
+      <p class="board__head"><span>about</span><span>platform 1</span><span>status</span></p>
+      <p class="board__row"><span>fiskal</span><span>--:--</span><span class="board__delayed">delayed</span></p>
+      <p class="board__reason">reason: leaves on the line</p>
+      <div class="loader__tea">
+        <div class="loader__track"><div class="loader__bar" id="loaderBar"></div></div>
+        <p class="loader__status"><span id="loaderStatus">boiling the kettle</span> - <span id="loaderPercent">0%</span></p>
+      </div>
+    </div>
+    <p class="loader__hint">click anywhere to skip. the kettle does not care.</p>
+  </div>
+
+  <!-- ===== motorway gantry nav ===== -->
+  <header class="gantry">
+    <nav class="gantry__inner" aria-label="main">
+      <a class="gantry__brand" href="#top">fiskal</a>
+      <a class="gantry__link" href="#about"><span>J1</span>about</a>
+      <a class="gantry__link" href="#skills"><span>J2</span>skills</a>
+      <a class="gantry__link" href="#projects"><span>J3</span>projects</a>
+      <a class="gantry__link" href="#contact"><span>J4</span>contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== hero + fake terminal ===== -->
+    <section class="section hero" id="top" aria-labelledby="heroTitle">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">// about v4</p>
+          <h1 class="hero__title" id="heroTitle" aria-label="hiya, i'm fiskal."><span id="heroGreeting">hiya, i'm <mark>fiskal</mark>.</span><span class="caret" aria-hidden="true"></span></h1>
+          <p class="hero__lead">i make bookkeeping-adjacent tools but used to build roblox systems. unemployed asl, too many ideas at night. both very real, neither glamorous.</p>
+          <p class="hero__time"><span>GMT</span> <time id="heroTime"></time></p>
+        </div>
+
+        <section class="terminal" aria-label="interactive terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dot" aria-hidden="true"></span>
+            <span class="terminal__dot" aria-hidden="true"></span>
+            <span class="terminal__dot" aria-hidden="true"></span>
+            <span class="terminal__title">visitor@fiskal: ~</span>
+          </div>
+          <div class="terminal__body" id="terminalBody">
+            <div class="terminal__out" id="terminalOutput" role="log" aria-live="polite" aria-label="terminal output"></div>
+            <form class="terminal__form" id="terminalForm" autocomplete="off">
+              <label class="sr-only" for="terminalInput">type a command, try help</label>
+              <span class="terminal__prompt" aria-hidden="true">visitor@fiskal:~$</span>
+              <input class="terminal__input" id="terminalInput" name="command" type="text" spellcheck="false" autocapitalize="off" autocomplete="off">
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== about / git blame ===== -->
+    <section class="section" id="about" aria-labelledby="aboutTitle">
+      <div class="container">
+        <header class="section__head reveal">
+          <div>
+            <p class="section__kicker">// 01</p>
+            <h2 class="section__title" id="aboutTitle">about (git blame)</h2>
+          </div>
+        </header>
+
+        <div class="bento">
+          <article class="card card--w7 reveal" aria-labelledby="blameLabel">
+            <p class="card__label" id="blameLabel">git blame fiskal</p>
+            <ol class="commits" id="commitList"></ol>
+          </article>
+
+          <article class="card card--w5 card--blue reveal">
+            <p class="card__label">now playing</p>
+            <p class="radio-line">Heart UK</p>
+            <div class="radio-controls" role="group" aria-label="radio controls">
+              <button type="button" data-radio="playPause" aria-label="pause">❚❚</button>
+            </div>
+          </article>
+
+          <article class="card card--w4 reveal" aria-labelledby="fuelLabel">
+            <p class="card__label" id="fuelLabel">currently fuelled by</p>
+            <ul class="fuel">
+              <li><span class="fuel__count" data-fuel-out="tea">0</span> teas</li>
+              <li><span class="fuel__count" data-fuel-out="energyDrink">0</span> energy drinks</li>
+              <li><span class="fuel__count">0</span> hours of sleep <small>(404)</small></li>
+            </ul>
+            <div class="fuel__buttons">
+              <button type="button" class="chip" data-fuel="tea">+ tea</button>
+              <button type="button" class="chip" data-fuel="energyDrink">+ energy drink</button>
+            </div>
+          </article>
+
+          <article class="card card--w4 reveal" aria-labelledby="rizzLabel">
+            <p class="card__label" id="rizzLabel">recruiter rizz-o-meter</p>
+            <p class="rizz" id="rizzOutput" aria-live="polite">recruiter rizz: not yet measured</p>
+            <p class="rizz__verdict" id="rizzVerdict">press the button. don't overthink it.</p>
+            <button type="button" class="button button--small" id="rizzButton">run the rizz check</button>
+          </article>
+
+          <article class="card card--w4 reveal" aria-labelledby="statusLabel">
+            <p class="card__label" id="statusLabel">status</p>
+            <p class="status-line">open to chats, maybe jobs, definitely tea.</p>
+            <p class="card__fine">replies within a day, usually within the hour. occasionally within the minute, which is worrying.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== skills ===== -->
+    <section class="section" id="skills" aria-labelledby="skillsTitle">
+      <div class="container">
+        <header class="section__head reveal">
+          <div>
+            <p class="section__kicker">// 02</p>
+            <h2 class="section__title" id="skillsTitle">skills</h2>
+          </div>
+          <p class="section__aside">i rated myself. be gentle.</p>
+        </header>
+
+        <div class="bento">
+          <article class="card card--w7 reveal" aria-labelledby="barsLabel">
+            <p class="card__label" id="barsLabel">skill bars</p>
+            <div class="skills" id="skillList"></div>
+          </article>
+
+          <article class="card card--w5 reveal">
+            <p class="meme-big">this is like totally honest btw</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== projects ===== -->
+    <section class="section" id="projects" aria-labelledby="projectsTitle">
+      <div class="container">
+        <header class="section__head reveal">
+          <div>
+            <p class="section__kicker">// 03</p>
+            <h2 class="section__title" id="projectsTitle">projects</h2>
+          </div>
+        </header>
+
+        <div class="project-grid" id="projectsStandard"></div>
+
+        <p class="card__fine reveal">"works on my machine" means it works on my machine.</p>
+      </div>
+    </section>
+
+    <!-- ===== contact ===== -->
+    <section class="section" id="contact" aria-labelledby="contactTitle">
+      <div class="container">
+        <header class="section__head reveal">
+          <div>
+            <p class="section__kicker">// 04</p>
+            <h2 class="section__title" id="contactTitle">contact</h2>
+          </div>
+        </header>
+          </article>
+
+          <article class="card card--w5 reveal" aria-labelledby="dmLabel">
+            <p class="card__label" id="dmLabel">or just dm me</p>
+            <p class="dm__lead">i reply faster than i should.</p>
+            <ul class="dm__list">
+              <li><span>discord</span><strong>fiscalyear</strong></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== footer ===== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <p class="footer__made">made in london, where it is, in fairness, grey.<br>weather today: <span id="weatherText">checking the sky…</span></p>
+      <div class="footer__links">
+        <a href="#top">back to top ↑</a>
+        <a href="404.html">wrong page? start here</a>
+        <button type="button" class="link-button" id="lightJoke">light mode (don't)</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== cookie banner (joke, but the buttons do work) ===== -->
+  <div class="cookie" id="cookieBanner" role="region" aria-label="cookie notice" hidden>
+    <p class="cookie__title">we use biscuits. mostly digestives.</p>
+    <div class="cookie__actions">
+      <button type="button" class="button button--ghost" data-cookie="dunk">dunk</button>
+      <button type="button" class="button" data-cookie="harder">dunk harder</button>
+    </div>
+  </div>
+
+  <!-- ===== overlays and effects ===== -->
+  <p class="toast" id="toast" role="status" aria-live="polite"></p>
+  <div class="light-flash" id="lightFlash" aria-hidden="true"><p>mate, my eyes.</p></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__ring"></span></div>
+
+  <!-- ===== pfp easter egg: click for British commentary ===== -->
+  <button type="button" class="pfp" id="pfpButton" aria-describedby="pfpBubble">
+    <span class="pfp__bubble" id="pfpBubble"></span>
+    <img class="pfp__img" id="pfpImage" src="pfp.png" alt="" width="52" height="52">
+  </button>
+
+</body>
+</html>
