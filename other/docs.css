@@ -1,0 +1,357 @@
+/* ==========================================================
+   docs.css
+   look for the documentation pages. builds on styles.css so
+   the palette, font and gantry nav match the portfolio.
+   ========================================================== */
+
+.docs {
+  --accent: var(--accentLime);
+  --accent2: var(--accentAmber);
+  --text: var(--colourText);
+  --muted: var(--colourMuted);
+  --dim: #1c1c22;
+  --border: var(--colourBorder);
+  --surface: var(--colourCard);
+}
+
+.docs .wrap {
+  width: min(680px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3.5rem 0 2rem;
+}
+
+.docs header {
+  margin-bottom: 1.75rem;
+  padding: 1rem 0 1.1rem;
+  border-bottom: 2px solid var(--text);
+}
+
+.docs .tag-label {
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.docs .name {
+  font-family: var(--fontSign);
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.docs .name span {
+  color: var(--accent);
+}
+
+.docs .role {
+  margin-top: 0.5rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.docs .section {
+  margin-bottom: 1.75rem;
+  padding: 0;
+}
+
+.docs .sec-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+  font-family: var(--fontMono);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.docs .sec-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.docs .sec-label span {
+  margin-right: 0.2rem;
+  color: var(--accent);
+}
+
+.docs .about-text {
+  max-width: 72ch;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.docs .card {
+  margin-bottom: 0.6rem;
+  padding: 0.8rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.docs .card::before {
+  display: none;
+}
+
+.docs .card-title {
+  margin-bottom: 0.3rem;
+  font-family: var(--fontSign);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.docs .card-desc {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.docs .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.docs .flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.6rem 0;
+}
+
+.docs .flow-step {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--dim);
+  font-size: 0.78rem;
+  color: var(--text);
+}
+
+.docs .flow-arrow {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.docs .code-block {
+  margin: 0.5rem 0;
+  padding: 0.7rem 0.85rem;
+  overflow-x: auto;
+  white-space: pre;
+  background: #050507;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #c3e88d;
+}
+
+.docs .kw { color: #c792ea; }
+.docs .fn { color: #82aaff; }
+.docs .cm { color: #6b8794; font-style: italic; }
+.docs .num { color: #f78c6c; }
+.docs .str { color: #c3e88d; }
+.docs .tbl { color: #ffcb6b; }
+
+.docs .file-tree {
+  font-size: 0.84rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.docs .file-tree .dir { color: var(--accent); }
+.docs .file-tree .file { color: var(--text); }
+.docs .file-tree .note { color: var(--muted); font-style: italic; }
+.docs .file-tree .shared { color: var(--accent2); }
+
+.docs .step-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.docs .step-row:last-child {
+  border-bottom: 0;
+}
+
+.docs .step-num {
+  min-width: 1.6rem;
+  font-family: var(--fontMono);
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+.docs .step-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.docs .step-text strong {
+  color: var(--text);
+}
+
+.docs .tip-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.35rem 0;
+}
+
+.docs .tip-icon {
+  min-width: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.docs .tip-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.docs .warn-text,
+.docs .warn .tip-text,
+.docs .warn .tip-icon {
+  color: var(--accent2);
+}
+
+.docs .api-row,
+.docs .remote-row,
+.docs .config-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.docs .api-row:last-child,
+.docs .remote-row:last-child,
+.docs .config-row:last-child {
+  border-bottom: 0;
+}
+
+.docs .api-name,
+.docs .config-key,
+.docs .remote-name {
+  min-width: 11rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+.docs .remote-name {
+  min-width: 8.5rem;
+}
+
+.docs .remote-type {
+  min-width: 7.5rem;
+  font-size: 0.72rem;
+  color: var(--accent2);
+}
+
+.docs .api-desc,
+.docs .config-desc,
+.docs .remote-desc {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.docs .sidebar {
+  position: fixed;
+  top: 3.5rem;
+  left: calc(50% - 530px);
+  z-index: 100;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.docs .sidebar__back {
+  margin-bottom: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  border-bottom: 2px solid var(--text);
+  font-family: var(--fontSign);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.docs .sidebar a {
+  padding: 0.3rem 0.6rem;
+  border-left: 2px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.docs .sidebar a:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.docs .sidebar a[aria-current="true"] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 1100px) {
+  .docs .sidebar {
+    display: none;
+  }
+}
+
+.docs footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--text);
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.docs footer div:last-child {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .docs .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .docs .api-row,
+  .docs .remote-row,
+  .docs .config-row,
+  .docs .step-row {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .docs .api-name,
+  .docs .config-key,
+  .docs .remote-name {
+    min-width: 0;
+  }
+}
