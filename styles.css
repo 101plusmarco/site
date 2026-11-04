@@ -1474,12 +1474,6 @@ code {
   transform: translate(-50%, -50%) rotate(-45deg);
   outline: 1px solid rgba(201, 255, 69, 0.5);
   outline-offset: 8px;
-  animation: pinBob 2.4s var(--easeSnap) infinite;
-}
-
-@keyframes pinBob {
-  0%, 100% { transform: translate(-50%, -50%) rotate(-45deg); }
-  50% { transform: translate(-50%, -62%) rotate(-45deg); }
 }
 
 .map__label,
