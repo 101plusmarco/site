@@ -497,96 +497,87 @@ code {
   transform: scale(0.95);
 }
 
-/* ---------- terminal ---------- */
+/* ---------- mini spreadsheet (hero widget) ---------- */
 
-.terminal {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--colourBorder);
-  background: #060607;
+.sheet {
+  margin: 0 0 0 auto;
+  max-width: 360px;
+  border: 1px solid var(--hairline);
+  background: var(--inkRaised);
   font-family: var(--fontMono);
-  font-size: 0.85rem;
-  transition: border-color 0.25s var(--easeSnap), box-shadow 0.25s var(--easeSnap);
+  font-size: 0.68rem;
+  color: var(--paperText);
+  overflow-x: auto;
 }
 
-.terminal:focus-within {
-  border-color: var(--accentLime);
-}
-
-.terminal__bar {
+.sheet__formula {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.5rem 0.8rem;
-  border-bottom: 1px solid var(--colourBorder);
-  background: #0d0d11;
+  gap: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--inkMuted);
 }
 
-.terminal__dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  background: #3a3a44;
+.sheet__address {
+  padding: 0 0.4rem;
+  border: 1px solid var(--hairline);
+  color: var(--paperText);
 }
 
-.terminal__title {
-  margin-left: 0.5rem;
-  color: var(--colourMuted);
-  font-size: 0.76rem;
+.sheet__fx {
+  font-style: italic;
+  color: var(--signal);
 }
 
-.terminal__body {
-  height: 200px;
-  padding: 0.8rem;
-  overflow-y: auto;
-  cursor: text;
+.sheet__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
 }
 
-.terminal__out {
-  white-space: pre-wrap;
-  word-break: break-word;
+.sheet__table th,
+.sheet__table td {
+  padding: 0.2rem 0.35rem;
+  border: 1px solid var(--hairline);
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
 }
 
-.terminal__line {
-  margin: 0 0 0.25rem;
+.sheet__table thead th {
+  background: #0e1012;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
 }
 
-.terminal__line--cmd {
-  color: var(--colourMuted);
+.sheet__table tbody th,
+.sheet__rowhead {
+  width: 2.2rem;
+  text-align: center;
+  background: #0e1012;
+  color: var(--inkMuted);
 }
 
-.terminal__line--ok {
-  color: var(--accentLime);
-}
-
-.terminal__line--sudo {
-  color: var(--accentAmber);
-}
-
-.terminal__form {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.terminal__prompt {
-  color: var(--accentLime);
+.sheet__table .num {
+  text-align: right;
   white-space: nowrap;
 }
 
-.terminal__input {
-  flex: 1;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--colourText);
-  font: inherit;
-  caret-color: var(--accentLime);
+.sheet__dr {
+  color: var(--signal);
 }
 
-.terminal__input:focus {
-  outline: none;
+.sheet__table tbody tr:hover td {
+  background: var(--signalSoft);
+}
+
+.sheet__table tfoot th,
+.sheet__table tfoot td {
+  border-top: 3px double var(--paperText);
+  font-weight: 700;
 }
 
 /* ---------- bento grid ---------- */
@@ -1299,9 +1290,6 @@ code {
     gap: 1.5rem;
   }
 
-  .terminal__body {
-    height: 180px;
-  }
 
   .card--w4,
   .card--w5,
