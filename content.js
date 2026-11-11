@@ -18,51 +18,20 @@ const siteConfig = {
   discord: 'fiscalyear'
 };
 
-/*
-  projects
-  status is one of:
-  - 'shipped'
-  - 'shipped (bugs included)'
-  - 'abandoned but cool'
-  - 'works on my machine'
-  the badge colour is picked automatically from the status text.
-*/
-const projectList = [
-  {
-    title: 'modular round & ability system',
-    summary: 'a scalable round-based system with an integrated ability framework. built for clean extensibility and structured client-server communication.',
-    stack: ['Roblox Lua', 'RemoteEvents', 'Modular architecture', 'State management'],
-    status: 'shipped',
-    note: 'for sale (ask nicely)',
-    url: 'https://fbrand.uk/other/round_system_docs',
-    linkLabel: 'read the docs'
-  },
-  {
-    title: 'modular rng case system',
-    summary: 'weighted tier rolling, a pity system, inventory management, global events and secure datastore saving. the case opening is the easy part. the pity system is where i lost a weekend.',
-    stack: ['Roblox Lua', 'Weighted RNG', 'DataStore', 'Modular'],
-    status: 'shipped',
-    note: 'for sale',
-    url: 'https://fbrand.uk/other/rng_system_docs',
-    linkLabel: 'read the docs'
-  }
-];
-
 const commitLog = [
-  { hash: 'a1f3c9e', date: '2018', message: 'feat: first website, made from a tutorial and very messy' },
-  { hash: 'b72d10a', date: '2019', message: 'fix: stopped using var (finally)' },
-  { hash: 'c0ffee1', date: '2021', message: 'feat: software engineering is not for me' },
-  { hash: 'c0ffee1', date: '2025', message: 'feat: let\'s do accounting instead' },
-  { hash: 'e9a8b7c', date: '2026', message: 'feat: unemployed. lots of free time, probably way too much' },
+  { hash: 'JE-0001', date: '2018', message: 'cr: first bank account, balance very messy' },
+  { hash: 'JE-0002', date: '2019', message: 'adj: stopped paying in cash (finally)' },
+  { hash: 'JE-0003', date: '2023', message: 'dr: software engineering is not for me' },
+  { hash: 'JE-0004', date: '2025', message: "cr: accounting instead (a much better decision)" },
+  { hash: 'JE-0005', date: '2026', message: 'bal: unemployed. lots of free time, probably way too much' },
 ];
 
 const skillList = [
-  { name: 'Lua (Roblox)', note: 'lowk elite', level: 26 },
-  { name: 'Modular architecture', note: 'boxes inside boxes, all labelled', level: 63 },
-  { name: 'JavaScript', note: "it's giving centred div", level: 52 },
-  { name: 'Accounting', note: 'the spreadsheets are on me', level: 100 },
-  { name: 'React & SQL', note: 'enough to be dangerous', level: 39 },
-  { name: 'Java / C++', note: 'at least i know where the semicolons go', level: 32 },
+  { name: 'Excel', note: 'lowk elite', level: 62 },
+  { name: 'Bank reconciliations', note: 'boxes inside boxes, all matched', level: 83 },
+  { name: 'Tax returns', note: "yay... taxes", level: 84 },
+  { name: 'Xero & QuickBooks', note: 'enough to be dangerous', level: 71 },
+  { name: 'IFRS & Swiss GAAP FER', note: 'at least i know where the decimal points go', level: 75 },
 ];
 
 const heroGreetings = [
@@ -94,7 +63,3 @@ const pfpLines = [
   'right, that\'s me done for the day. ta-ra.'
 ];
 
-const terminalAbout = [
-  'fiskal: unemployed asl.',
-  'i\'m an accountant. i work with money, yeah. no, it\'s not just math.'
-];
