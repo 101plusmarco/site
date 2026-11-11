@@ -137,7 +137,7 @@
     items.forEach((item) => observer.observe(item));
   }
 
-  /* ---------- about: commits, now playing ---------- */
+  /* ---------- about: statement of account lines ---------- */
 
   function renderCommits() {
     const list = byId('commitList');
@@ -204,69 +204,6 @@
     });
   }
 
-  /* ---------- projects ---------- */
-
-  function badgeToneFor(status) {
-    if (status.startsWith('shipped (')) return 'warn';
-    if (status === 'shipped') return 'good';
-    if (status.startsWith('abandoned')) return 'blue';
-    return 'muted';
-  }
-
-  function createProjectCard(project) {
-    const article = document.createElement('article');
-    article.className = 'card project-card reveal';
-
-    const top = document.createElement('div');
-    top.className = 'project-card__top';
-
-    const badge = document.createElement('span');
-    badge.className = `badge badge--${badgeToneFor(project.status)}`;
-    badge.textContent = project.status;
-    top.appendChild(badge);
-
-    if (project.note) {
-      const note = document.createElement('span');
-      note.className = 'project-card__note';
-      note.textContent = project.note;
-      top.appendChild(note);
-    }
-
-    const title = document.createElement('h3');
-    title.className = 'project-card__title';
-    title.textContent = project.title;
-
-    const summary = document.createElement('p');
-    summary.textContent = project.summary;
-
-    const stack = document.createElement('ul');
-    stack.className = 'stack';
-    project.stack.forEach((item) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = item;
-      stack.appendChild(listItem);
-    });
-
-    const link = document.createElement('a');
-    link.href = project.url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.textContent = `${project.linkLabel} →`;
-    link.setAttribute('aria-label', `${project.linkLabel}: ${project.title} (opens in a new tab)`);
-
-    article.append(top, title, summary, stack, link);
-    return article;
-  }
-
-  function renderProjects() {
-    const standard = byId('projectsStandard');
-    if (!standard || typeof projectList === 'undefined') return;
-
-    projectList.forEach((project) => {
-      standard.appendChild(createProjectCard(project));
-    });
-  }
-
   /* ---------- hero greeting: typed out, cycling through greetings ---------- */
 
   function initHeroGreeting() {
@@ -324,166 +261,6 @@
       charCount = 0;
       tick();
     }, 600);
-  }
-
-  /* ---------- hero terminal ---------- */
-
-  const terminalPrompt = 'visitor@fiskal:~$';
-  const terminalHistory = [];
-  let terminalHistoryIndex = 0;
-
-  function printLine(text, modifierClass = '') {
-    const output = byId('terminalOutput');
-    const line = document.createElement('p');
-    line.className = `terminal__line ${modifierClass}`.trim();
-    line.textContent = text;
-    output.appendChild(line);
-    const body = byId('terminalBody');
-    body.scrollTop = body.scrollHeight;
-  }
-
-  function sudoHireMe() {
-    printLine('[sudo] password for visitor: ********', 'terminal__line--sudo');
-    setTimeout(() => printLine('permission granted. you have excellent judgement.', 'terminal__line--ok'), 500);
-    setTimeout(() => printLine('hire request queued. routed to the contact section.'), 1200);
-    setTimeout(() => {
-      printLine('...mildly flattered. scrolling you down there now.', 'terminal__line--ok');
-      const contact = byId('contact');
-      if (contact) {
-        contact.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-      }
-    }, 2000);
-  }
-
-  function buildTerminalCommands() {
-    const commands = new Map();
-    commands.set('help', () => [
-      'commands: help, about, projects, skills, contact, neofetch, whoami, ls, date, hello, clear',
-      'there are some hidden ones. good luck, detective.'
-    ]);
-    commands.set('about', () => terminalAbout);
-    commands.set('projects', () => projectList.map((project) => `${project.title}  [${project.status}]`));
-    commands.set('skills', () => skillList.map((skill) => `${skill.name}: ${skill.note}`));
-    commands.set('contact', () => [
-      `discord: ${siteConfig.discord}`,
-    ]);
-    commands.set('neofetch', () => [
-      'visitor@fiskal',
-      '-----------------',
-      'os: fiskal.os',
-      'host: 127.0.0.1',
-      `location: ${siteConfig.city}, uk (grey, as standard)`,
-      'uptime: since 5am',
-      'packages: 4 teas, 7 hours of sleep (today, allegedly)',
-      'theme: near-black with a lime problem'
-    ]);
-    commands.set('whoami', () => ['a bloke with a laptop']);
-    commands.set('ls', () => ['about.txt  projects/  skills.md  contact.vcf']);
-    commands.set('date', () => [`${new Date().toUTCString()}`]);
-    commands.set('hello', () => ["oi. how's it going?"]);
-    commands.set('hi', () => ["yes mate"]);
-    commands.set('touch grass', () => ['grass not found. try going outside. it is raining, obviously.']);
-    commands.set('exit', () => ["you can't leave. the tea is too strong."]);
-    commands.set('make me a sandwich', () => ['okay. one greggs sausage roll, delivered.']);
-    commands.set('rm -rf /', () => ['whoa. nothing was deleted (this is a fake terminal, sadly).']);
-    commands.set('rm -rf ~', () => ['whoa. nothing was deleted (this is a fake terminal, sadly).']);
-    commands.set('rm -rf *', () => ['whoa. nothing was deleted (this is a fake terminal, sadly).']);
-    return commands;
-  }
-
-  function runTerminalCommand(rawInput) {
-    const input = rawInput.trim();
-    const command = input.toLowerCase().replace(/\s+/g, ' ');
-    printLine(`${terminalPrompt} ${input}`, 'terminal__line--cmd');
-    if (!command) return;
-
-    if (command === 'clear') {
-      byId('terminalOutput').textContent = '';
-      return;
-    }
-
-    if (command === 'sudo hire') {
-      sudoHireMe();
-      return;
-    }
-
-    if (command === 'hi hun') {
-      printLine('hi babe');
-      return;
-    }
-
-    if (command === 'status') {
-      printLine('taken <333');
-      return;
-    }
-
-    if (command === 'bf') {
-      printLine('none of ya business mate');
-      return;
-    }
-
-    if (command === 'sudo') {
-      printLine('sudo: a verb is required, mate.', 'terminal__line--sudo');
-      return;
-    }
-
-    if (command.startsWith('rm ')) {
-      printLine('rm: nope. this is a sandbox, but your trust in me is not.', 'terminal__line--sudo');
-      return;
-    }
-
-    const commands = buildTerminalCommands();
-    const handler = commands.get(command);
-    if (handler) {
-      handler().forEach((line) => printLine(line));
-      return;
-    }
-
-    if (command.startsWith('sudo ')) {
-      printLine(`${command.slice(5)}: sudo is not a licence to do anything. (you are not root, you are a visitor.)`, 'terminal__line--sudo');
-      return;
-    }
-
-    printLine(`command not found: ${command}. have you tried turning it off and on again?`);
-  }
-
-  function initTerminal() {
-    const form = byId('terminalForm');
-    const input = byId('terminalInput');
-    const body = byId('terminalBody');
-    if (!form || !input || !body) return;
-
-    printLine('welcome to fiskal.os (real). type "help".', 'terminal__line--ok');
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const value = input.value;
-      if (value.trim()) {
-        terminalHistory.push(value);
-        terminalHistoryIndex = terminalHistory.length;
-      }
-      runTerminalCommand(value);
-      input.value = '';
-    });
-
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        if (terminalHistoryIndex > 0) {
-          terminalHistoryIndex -= 1;
-          input.value = terminalHistory[terminalHistoryIndex];
-        }
-      } else if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        terminalHistoryIndex = Math.min(terminalHistory.length, terminalHistoryIndex + 1);
-        input.value = terminalHistory[terminalHistoryIndex] || '';
-      }
-    });
-
-    body.addEventListener('click', (event) => {
-      if (event.target.closest('a, button')) return;
-      input.focus();
-    });
   }
 
   /* ---------- tea rain (konami code and the 100 teas egg) ---------- */
@@ -560,7 +337,7 @@
         position += 1;
         if (position === konamiSequence.length) {
           position = 0;
-          triggerTeaRain('+30 lives. you are now a senior engineer. (you are not.)');
+          triggerTeaRain('+30 lives. you are now a senior accountant. (you are not.)');
         }
       } else {
         position = key === konamiSequence[0] ? 1 : 0;
@@ -870,13 +647,11 @@
     initStartAtTop();
     renderCommits();
     renderSkills();
-    renderProjects();
 
     initLoader();
     initActiveNav();
     initHeroGreeting();
     initReveal();
-    initTerminal();
     initKonami();
     initRadioControls();
     initRizzMeter();
